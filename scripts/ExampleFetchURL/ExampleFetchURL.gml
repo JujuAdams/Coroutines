@@ -1,10 +1,10 @@
 function ExampleFetchURL(_url)
 {
     //Pass our function arguments into the coroutine we're going to make
-    COROUTINE_PARAMS.url = string(_url);
+    CO_PARAMS.url = string(_url);
     
     //Build a coroutine, and then return it out of this function
-    return COROUTINE_BEGIN
+    return CO_BEGIN
         
         //Set up a variable to store the data we get back from the remote server
         data = "";
@@ -44,5 +44,5 @@ function ExampleFetchURL(_url)
         show_debug_message("data = \"" + data + "\"");
         show_debug_message("HTTP GET for \"" + url + "\" complete");
         
-    COROUTINE_END
+    CO_END
 }

@@ -42,6 +42,7 @@ function __CoroutineRootClass() constructor
     __returnValue = undefined;
     
     __executing = false;
+    __topLevel = true;
     
     static Get = function()
     {
@@ -87,18 +88,7 @@ function __CoroutineRootClass() constructor
         __complete = true;
         __executing = false;
         
-        var _array = global.__coroutineExecuting;
-        var _i = 0;
-        repeat(array_length(_array))
-        {
-            if (_array[_i] == self)
-            {
-                array_delete(_array, _i, 1);
-                return undefined;
-            }
-            
-            ++_i;
-        }
+        __RemoveFromAutomation();
     }
     
     static Restart = function()
@@ -127,7 +117,7 @@ function __CoroutineRootClass() constructor
         if (__complete || __paused) return undefined;
         
         //Set up some global state variables that child classes will read
-        global.__coroutineApproxEndTime = get_timer() + __duration;
+        if (__topLevel) global.__coroutineApproxEndTime = get_timer() + __duration;
         global.__coroutineEscapeState = __COROUTINE_ESCAPE_STATE.__NONE;
         global.__coroutineBreak = false;
         global.__coroutineReturnValue = undefined;
@@ -183,6 +173,8 @@ function __CoroutineRootClass() constructor
                 __returnValue = global.__coroutineReturnValue;
             break;
         }
+        
+        if (__topLevel) global.__coroutineEscapeState = __COROUTINE_ESCAPE_STATE.__NONE;
     }
     
     static __Add = function(_new)
@@ -196,6 +188,22 @@ function __CoroutineRootClass() constructor
         {
             __executing = true;
             array_push(global.__coroutineExecuting, self);
+        }
+    }
+    
+    static __RemoveFromAutomation = function()
+    {
+        var _array = global.__coroutineExecuting;
+        var _i = 0;
+        repeat(array_length(_array))
+        {
+            if (_array[_i] == self)
+            {
+                array_delete(_array, _i, 1);
+                return undefined;
+            }
+            
+            ++_i;
         }
     }
 }

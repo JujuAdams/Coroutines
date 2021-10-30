@@ -34,12 +34,13 @@ function CoroutineEventHook()
         var _key = undefined;
         switch(event_number)
         {
-            case ev_async_web_async:    _key = "http";      break;
-            case ev_async_social:       _key = "social";    break;
-            case ev_async_save_load:    _key = "save_load"; break;
-            case ev_async_dialog_async: _key = "dialog";    break;
-            case ev_async_web_steam:    _key = "steam";     break;
-            case ev_async_system_event: _key = "system";    break;
+            case ev_async_web_networking: _key = "networking"; break;
+            case ev_async_web_async:      _key = "http";       break;
+            case ev_async_social:         _key = "social";     break;
+            case ev_async_save_load:      _key = "save_load";  break;
+            case ev_async_dialog_async:   _key = "dialog";     break;
+            case ev_async_web_steam:      _key = "steam";      break;
+            case ev_async_system_event:   _key = "system";     break;
         }
         
         if (_key == undefined)

@@ -100,7 +100,11 @@ function __CoroutineIfClass() constructor
            ||  __complete
            ||  (get_timer() > global.__coroutineApproxEndTime));
         
-        //N.B. We don't clear up the BREAK state because we want break to bleed through to the next loop
+        if (global.__coroutineBreak)
+        {
+            //N.B. We don't clear up the BREAK state because we want break to bleed through to the next loop
+            __complete = true;
+        }
     }
     
     static __Add = function(_new)

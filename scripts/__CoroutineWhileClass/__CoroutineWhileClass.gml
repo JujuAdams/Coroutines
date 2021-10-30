@@ -66,7 +66,12 @@ function __CoroutineWhileClass() constructor
            ||  __complete
            ||  (get_timer() > global.__coroutineApproxEndTime));
         
-        global.__coroutineBreak = false;
+        //Clean up the BREAK state
+        if (global.__coroutineBreak)
+        {
+            global.__coroutineBreak = false;
+            __complete = true;
+        }
     }
     
     static __Add = function(_new)

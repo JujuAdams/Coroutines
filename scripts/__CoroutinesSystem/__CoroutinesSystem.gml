@@ -33,38 +33,41 @@ enum __COROUTINE_ESCAPE_STATE
 
 #region What hath Science birthed on this Moon-less night
 
-#macro COROUTINE_BEGIN        ((function(){__CoroutineFunction(function(){
-#macro COROUTINE_END          });\
-                              if (array_length(global.__coroutineStack) != 1) __CoroutineError("Illegal stack size (", array_length(global.__coroutineStack), ")");\
-                              array_resize(global.__coroutineStack, 0);\
-                              global.__coroutineNext.__Execute();\
-                              var _result = global.__coroutineNext;\
-                              global.__coroutineNext = __CoroutineBegin();\
-                              return _result;\
-                              })())
-                              
-#macro THEN                   });__CoroutineFunction(function(){
-#macro YIELD                  });__CoroutineEscape(__COROUTINE_ESCAPE_STATE.__YIELD,function(){return 
-#macro PAUSE                  });__CoroutineEscape(__COROUTINE_ESCAPE_STATE.__PAUSE,function(){return 
-#macro RETURN                 });__CoroutineEscape(__COROUTINE_ESCAPE_STATE.__RETURN,function(){return 
-#macro BREAK                  {global.__coroutineBreak=true;return undefined;}
-#macro REPEAT                 });__CoroutineRepeat(function(){return 
-#macro WHILE                  });__CoroutineWhile(function(){return 
-#macro POP                    });__CoroutinePop();__CoroutineFunction(function(){
-#macro IF                     });__CoroutineIf(function(){return 
-#macro ELSE                   });__CoroutineElse();__CoroutineFunction(function(){
-#macro ELSE_IF                });__CoroutineElseIf(function(){return 
-#macro END_IF                 });__CoroutinePop();__CoroutineFunction(function(){
-#macro AWAIT                  });__CoroutineAwait(function(){return 
-#macro DELAY                  });__CoroutineDelay(function(){return 
-#macro AWAIT_ASYNC_HTTP       });__CoroutineAwaitAsync("http",function(){
-#macro AWAIT_ASYNC_SOCIAL     });__CoroutineAwaitAsync("social",function(){
-#macro AWAIT_ASYNC_SAVE_LOAD  });__CoroutineAwaitAsync("save_load",function(){
-#macro AWAIT_ASYNC_DIALOG     });__CoroutineAwaitAsync("dialog",function(){
-#macro AWAIT_ASYNC_SYSTEM     });__CoroutineAwaitAsync("system",function(){
-#macro AWAIT_ASYNC_STEAM      });__CoroutineAwaitAsync("steam",function(){
-#macro TIMEOUT                },function(){return 
-#macro ASYNC_COMPLETE         return true;
+#macro CO_BEGIN                ((function(){__CoroutineFunction(function(){
+#macro CO_END                  });\
+                               if (array_length(global.__coroutineStack) != 1) __CoroutineError("Illegal stack size (", array_length(global.__coroutineStack), ")");\
+                               array_resize(global.__coroutineStack, 0);\
+                               global.__coroutineNext.coroutineCreator=self;\
+                               global.__coroutineNext.__Execute();\
+                               var _result = global.__coroutineNext;\
+                               global.__coroutineNext = __CoroutineBegin();\
+                               return _result;\
+                               })())
+#macro THEN                    });__CoroutineFunction(function(){
+#macro YIELD                   });__CoroutineEscape(__COROUTINE_ESCAPE_STATE.__YIELD,function(){return 
+#macro PAUSE                   });__CoroutineEscape(__COROUTINE_ESCAPE_STATE.__PAUSE,function(){return 
+#macro RETURN                  });__CoroutineEscape(__COROUTINE_ESCAPE_STATE.__RETURN,function(){return 
+#macro BREAK                   {global.__coroutineBreak=true;return undefined;}
+#macro REPEAT                  });__CoroutineRepeat(function(){return 
+#macro WHILE                   });__CoroutineWhile(function(){return 
+#macro FOREACH                 });__CoroutineForEach(function(_value){
+#macro IN                      =_value;},function(){return 
+#macro POP                     });__CoroutinePop();__CoroutineFunction(function(){
+#macro IF                      });__CoroutineIf(function(){return 
+#macro ELSE                    });__CoroutineElse();__CoroutineFunction(function(){
+#macro ELSE_IF                 });__CoroutineElseIf(function(){return 
+#macro END_IF                  });__CoroutinePop();__CoroutineFunction(function(){
+#macro AWAIT                   });__CoroutineAwait(function(){return 
+#macro DELAY                   });__CoroutineDelay(function(){return 
+#macro AWAIT_ASYNC_HTTP        });__CoroutineAwaitAsync("http",function(){
+#macro AWAIT_ASYNC_NETWORKING  });__CoroutineAwaitAsync("networking",function(){
+#macro AWAIT_ASYNC_SOCIAL      });__CoroutineAwaitAsync("social",function(){
+#macro AWAIT_ASYNC_SAVE_LOAD   });__CoroutineAwaitAsync("save_load",function(){
+#macro AWAIT_ASYNC_DIALOG      });__CoroutineAwaitAsync("dialog",function(){
+#macro AWAIT_ASYNC_SYSTEM      });__CoroutineAwaitAsync("system",function(){
+#macro AWAIT_ASYNC_STEAM       });__CoroutineAwaitAsync("steam",function(){
+#macro TIMEOUT                 },function(){return 
+#macro ASYNC_COMPLETE          return true;
 
 #endregion
 
@@ -81,7 +84,8 @@ global.__coroutineStack = [];
 global.__coroutineLastTick = current_time;
 
 global.__coroutineExecuting = [];
-global.__coroutineAwaitingAsync = {
+global.__coroutineAwaitingAsync = { //TODO - Is this faster as a map or a struct?
+    networking: [],
     http      : [],
     social    : [],
     save_load : [],
@@ -92,7 +96,7 @@ global.__coroutineAwaitingAsync = {
 
 
 
-#macro COROUTINE_PARAMS  global.__coroutineNext
+#macro CO_PARAMS  global.__coroutineNext
 global.__coroutineNext = __CoroutineBegin();
 
 

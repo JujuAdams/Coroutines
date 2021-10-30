@@ -1,4 +1,4 @@
-test1 = COROUTINE_BEGIN
+test1 = CO_BEGIN
     AWAIT (mouse_x > room_width/2) THEN
     IF (mouse_y < room_height/2) THEN
         PAUSE "up" THEN
@@ -6,7 +6,7 @@ test1 = COROUTINE_BEGIN
         PAUSE "down" THEN
     END_IF
     YIELD "done" THEN
-COROUTINE_END;
+CO_END;
 
 test2 = ExampleFetchURL("https://www.jujuadams.com/");
 test3 = ExampleFetchURL("https://www.veryfakeURL.com/");

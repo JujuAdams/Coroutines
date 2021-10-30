@@ -22,11 +22,16 @@ function __CoroutineRepeatClass() constructor
     
     static Restart = function()
     {
-        __index = 0;
-        __complete = false;
-        
         __repeats = 1;
         __repeatCount = 0;
+        
+        __Loop();
+    }
+    
+    static __Loop = function()
+    {
+        __index = 0;
+        __complete = false;
         
         var _i = 0;
         repeat(array_length(__functionArray))
@@ -70,13 +75,7 @@ function __CoroutineRepeatClass() constructor
                 }
                 else
                 {
-                    var _oldRepeats = __repeats;
-                    var _oldRepeatCount = __repeatCount;
-                    
-                    Restart();
-                    
-                    __repeats = _oldRepeats;
-                    __repeatCount = _oldRepeatCount;
+                    __Loop();
                 }
             }
         }
@@ -85,7 +84,12 @@ function __CoroutineRepeatClass() constructor
            ||  __complete
            ||  (get_timer() > global.__coroutineApproxEndTime));
         
-        global.__coroutineBreak = false;
+        //Clean up the BREAK state
+        if (global.__coroutineBreak)
+        {
+            global.__coroutineBreak = false;
+            __complete = true;
+        }
     }
     
     static __Add = function(_new)
