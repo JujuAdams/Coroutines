@@ -71,3 +71,11 @@ function CutsceneFindMyFroggy()
 	CO_END
 }
 ```
+
+This syntax is a little different to normal GML. Of particular note is the use of new flow control keywords. `WHILE` you've seen before no doubt (albeit as the lowercase `while` loop command) whereas a lot of the other allcaps commands are new or unfamiliar.
+
+`CO_BEGIN` and `CO_END` define the start and end points of the coroutine. Everything between these two markers constitutes code for the coroutine. Normal GML can be used throughout the coroutine, such as modifying variables in other instances, but to enable coroutine-specific behaviour, special coroutine syntax has to be used. `THEN` and `END` are structural commands that are similar to open `{` and close `}` braces in their usage.
+
+`AWAIT` and `DELAY` are commands provided for convenience. `AWAIT` will pause the coroutine at that line of code until the condition returns `true`. In the example above, we're waiting for the user to press the spacebar before advancing the cutscene onto the subsequent instructions. `DELAY` will wait for a certain amount of time to pass before proceeding (measured in milliseconds).
+
+Finally, we have the unusual command `YIELD`. This function is at the heart of coroutines. When a coroutine hits a `YIELD` command it'll immediately jump out of the coroutine and allow your game to execute other instructions. In the next step, the coroutine will resume from the `YIELD` command and continue executing code.
