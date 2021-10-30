@@ -15,7 +15,7 @@ When you write a block of code and run your game, the code you wrote is executed
 
 Asynchronous functions are different. Asynchronous functions **don't** have to fully complete all their code before the program can leave that function and do something else and, crucially, asynchronous functions can pick up where they left off and resume execution from where they were paused. This means you can write some code that, in the middle of it, can allow the overarching program to go do something else and come back to the function later.
 
-Many languages natively support writing asynchronous code, either as a core language feature, or a library that enables asynchronous execution. GML is the latter. As a result, it is necessary to develop our own system that emulates the features and behaviours of languages that support ansynchronous execution. This library implements a new specialist syntax for describing "coroutines". We're adding language features to GML.
+Many languages natively support writing asynchronous code, either as a core language feature, or a library that enables asynchronous execution. GML is the latter. As a result, it is necessary to develop our own system that emulates the features and behaviours of languages that do support ansynchronous functions. This library extends the syntax of GML so that we can describe coroutines.
 
 Before we get carried away with the technical specifics let's look at a quick example: a cutscene.
 
