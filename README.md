@@ -9,7 +9,7 @@
 
 &nbsp;
 
-We call a function that can be paused in the middle of execution and resumed later a "coroutine". This library allows you to write coroutines - pauseable functions - in GameMaker.
+This library allows you to write pauseable functions in GameMaker. These pauseable functions are called "coroutines": a block of code that can be paused in the middle of execution and resumed later.
 
 When you write a block of code and run your game, the code you wrote is executed sequentially, as fast as possible, with one command being executed immediately after the previous command has finished. We store code in functions with the intention that the program will move from one function to the next, making the game work. When the program enters into a function it has to complete the entire function (or at least up to a `return` command) before the program can exit the function and run other code. This is called "synchronous execution" and this is the way GameMaker works - code is run synchronously, one line after another, thousands of lines of code per frame spread over hundreds of functions.
 
