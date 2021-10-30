@@ -38,29 +38,29 @@ destroyed or deactivated, of course!
 
 
 
-    example = COROUTINE_BEGIN
+    example = CO_BEGIN
         oPlayer.x += 4;
         oEnemy.x += 2;
-    COROUTINE_END
+    CO_END
 
 Above is a very simple example of a basic (and kind of useless) coroutine. The
-COROUTINE_BEGIN macro starts the creation of the coroutine. After that we have two lines
+CO_BEGIN macro starts the creation of the coroutine. After that we have two lines
 of standard GML that moves oPlayer and oEnemy rightwards different amounts. Finally,
-the COROUTINE_END macro closes the coroutine definition.
+the CO_END macro closes the coroutine definition.
 
-Note that the COROUTINE_BEGIN macro returns a value that is stored in the "example"
-variable. COROUTINE_BEGIN returns the "coroutine root" struct mentioned above. You
+Note that the CO_BEGIN macro returns a value that is stored in the "example"
+variable. CO_BEGIN returns the "coroutine root" struct mentioned above. You
 should keep a reference to the coroutine root so that you can interact with the
 coroutine at a later point in your code. Coroutines will execute automatically.
 
 Let's try something a bit more useful:
 
-    example = COROUTINE_BEGIN
+    example = CO_BEGIN
         WHILE (oPlayer.x < 500) THEN
             oPlayer.x += 4;
             oEnemy.x += 4;
         POP
-    COROUTINE_END
+    CO_END
 
 Here we've used a WHILE macro to create a while-loop inside our coroutine. You can use
 standard GML while-loops inside a coroutine, there's nothing stopping you, but
@@ -105,14 +105,14 @@ in GML:
 
 In coroutine syntax, we could write this as:
 
-    COROUTINE_BEGIN
+    CO_BEGIN
         _i = 0;
         REPEAT array_length(array) THEN
             if (array[_i] == target) BREAK;
             _i++;
         POP;
         show_debug_message("Found at index=" + string(_i));
-    COROUTINE_END
+    CO_END
 
 Let's look at the actual GML that this generates (though we're skipping some of the
 apparatus that wraps around the following calls):
@@ -149,22 +149,22 @@ animation on behalf of the instance.
 
 
 
-COROUTINE_PARAMS can be used to set values in a coroutine that you're about to
+CO_PARAMS can be used to set values in a coroutine that you're about to
 create. This is useful for passing parameters into a coroutine, to set an initial
 starting condition to process.
 
     function AnimateX(_instance, _target, _speed)
     {
-        COROUTINE_PARAMS.instance = _instance;
-        COROUTINE_PARAMS.target   = _target;
-        COROUTINE_PARAMS.speed    = _speed;
+        CO_PARAMS.instance = _instance;
+        CO_PARAMS.target   = _target;
+        CO_PARAMS.speed    = _speed;
         
-        return COROUTINE_BEGIN
+        return CO_BEGIN
             WHILE (instance.x != target) THEN
                 instance.x += min(target - instance.x, speed);
             POP
             // Done!
-        COROUTINE_END
+        CO_END
     }
 
 The above function will animate the x-coordinate of the given instance over the

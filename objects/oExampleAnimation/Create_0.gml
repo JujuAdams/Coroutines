@@ -1,9 +1,9 @@
 // Set up some text to draw to the screen
 // We're going to use a coroutine to animate this!
 textArray = [
-    { x : 0, y :  50, targetX : 20, alpha : 0, text : "Coroutines" },
-    { x : 0, y :  70, targetX : 20, alpha : 0, text : "@jujuadams 2021" },
-    { x : 0, y : 100, targetX : 40, alpha : 0, text : "This is an example to demonstrate basic animations using a coroutine" },
+    { x :  0, y :  50, targetX : 20, alpha : 0, text : "Coroutines" },
+    { x :  0, y :  70, targetX : 20, alpha : 0, text : "@jujuadams 2021" },
+    { x : 20, y : 100, targetX : 40, alpha : 0, text : "This is an example to demonstrate basic animations using a coroutine." },
 ];
 
 // We're storing a reference to the coroutine here so we can show some debug information
@@ -28,7 +28,7 @@ animationCoroutine = CO_BEGIN
         WHILE (data.alpha < 1) or (data.x < data.targetX) THEN
             
             //Tween to the correct position, and fade in our alpha value
-            data.x = lerp(data.x, data.targetX, 0.2);
+            data.x = min(data.x + 1, data.targetX);
             data.alpha = min(data.alpha + 0.04, 1.0);
             
             // YIELD breaks out of the coroutine temporarily
@@ -43,7 +43,7 @@ CO_END;
 
 // The above can be written in a much more compact way:
 // 
-// COROUTINE_BEGIN
+// CO_BEGIN
 //     DELAY 300 THEN
 //     FOREACH data IN coroutineCreator.textArray THEN
 //         data = coroutineCreator.textArray[i];
@@ -53,4 +53,4 @@ CO_END;
 //             YIELD
 //         POP
 //     POP
-// COROUTINE_END;
+// CO_END;

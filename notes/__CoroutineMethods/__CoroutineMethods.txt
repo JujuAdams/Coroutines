@@ -1,4 +1,4 @@
-Coroutine roots, created by COROUTINE_BEGIN, have the following methods:
+Coroutine roots, created by CO_BEGIN, have the following methods:
 
 .Get()
     Returns a value that has been returned by either YIELD, PAUSE, or RETURN. If no value has
@@ -9,7 +9,7 @@ Coroutine roots, created by COROUTINE_BEGIN, have the following methods:
     has not paused at a PAUSE command this method does nothing. .Resume() resets the returned
     value for the coroutine to <undefined>.
 
-.IsPaused()
+.GetPaused()
     Returns if a coroutine has been paused by a PAUSE command.
 
 .Cancel()

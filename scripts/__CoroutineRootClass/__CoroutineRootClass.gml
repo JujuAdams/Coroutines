@@ -58,29 +58,9 @@ function __CoroutineRootClass() constructor
         }
     }
     
-    static GetComplete = function()
+    static GetPaused = function()
     {
-        return __complete;
-    }
-    
-    static SetContinuous = function(_state)
-    {
-        __continuous = _state;
-    }
-    
-    static GetContinuous = function()
-    {
-        return __continuous;
-    }
-    
-    static SetDuration = function(_duration = infinity)
-    {
-        __duration = _duration;
-    }
-    
-    static GetDuration = function()
-    {
-        return __duration;
+        return __paused;
     }
     
     static Cancel = function()
@@ -109,6 +89,31 @@ function __CoroutineRootClass() constructor
             if (is_struct(_function) && !is_method(_function)) _function.Restart();
             ++_i;
         }
+    }
+    
+    static GetComplete = function()
+    {
+        return __complete;
+    }
+    
+    static SetDuration = function(_duration = infinity)
+    {
+        __duration = _duration;
+    }
+    
+    static GetDuration = function()
+    {
+        return __duration;
+    }
+    
+    static SetContinuous = function(_state)
+    {
+        __continuous = _state;
+    }
+    
+    static GetContinuous = function()
+    {
+        return __continuous;
     }
     
     static __Run = function()

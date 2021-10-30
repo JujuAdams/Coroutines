@@ -4,13 +4,13 @@ These functions are executed in the same scope (the coroutine root struct) but o
 they cannot share local variables ("var" variables) due to being in separate functions.
 
 
-COROUTINE_BEGIN:
-    Starts a coroutine definition. It must always be matched by a COROUTINE_END command.
-    COROUTINE_BEGIN returns a "coroutine root" struct. You should keep a reference to this
+CO_BEGIN:
+    Starts a coroutine definition. It must always be matched by a CO_END command.
+    CO_BEGIN returns a "coroutine root" struct. You should keep a reference to this
     struct to access the coroutine at a later point in your code.
 
 
-COROUTINE_END:
+CO_END:
     Ends the definition of a coroutine. It must be called to finish defining the coroutine.
 
 
@@ -89,8 +89,21 @@ WHILE:
         POP
 
 
+FOREACH:
+    Convience feature that iterates over either 1) an array 2) a struct 3) the YIELD output
+    from a coroutine. Care should be taken not to modify an array or struct because the total
+    number of iterations is calculated when the FOREACH loop begins. When iterating over the
+    output from a coroutine, the YIELD value is assigned to the iterator variable.
+    
+    FOREACH syntax must look like this:
+    
+        FOREACH <iteratorVariable> IN <expression> THEN
+            //Further operations
+        POP
+
+
 POP:
-    Necessary to terminate a REPEAT or WHILE loop. It must not be used in other contexts.
+    Necessary to terminate a REPEAT or WHILE or FOREACH loop. It must not be used in other contexts.
 
 
 BREAK:
