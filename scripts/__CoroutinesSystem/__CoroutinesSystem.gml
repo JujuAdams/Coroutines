@@ -34,6 +34,7 @@ enum __COROUTINE_ESCAPE_STATE
 #region What hath Science birthed on this Moon-less night
 
 #macro CO_BEGIN                ((function(){__CoroutineFunction(function(){
+#macro CO_ON_COMPLETE          });__CoroutineOnComplete(function(){
 #macro CO_END                  });\
                                if (array_length(global.__coroutineStack) != 1) __CoroutineError("Illegal stack size (", array_length(global.__coroutineStack), ")");\
                                array_resize(global.__coroutineStack, 0);\

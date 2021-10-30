@@ -14,6 +14,20 @@ CO_END:
     Ends the definition of a coroutine. It must be called to finish defining the coroutine.
 
 
+CO_ON_COMPLETE:
+    Adds code to the coroutine to be executed once the coroutine is marked as "complete".
+    CO_ON_COMPLETE must be basic, standard GML and cannot include any of the macro commands
+    that are listed here (it's "just a function"). CO_ON_COMPLETE code is executed in the
+    scope of the coroutine, as all other coroutine code is.
+    
+    Note that a coroutine is marked as complete in the following situations:
+        1. When the coroutine runs out of code to execute
+        2. When a RETURN command is executed
+        3. When the .Cancel() method is called on the coroutine root struct
+    
+    CO_ON_COMPLETE code will execute in all of these situations
+
+
 THEN:
     Acts as a way to separate different coroutine operations. THEN is required syntax in a
     handful of situations, but it is also useful to break up long sections of code that are

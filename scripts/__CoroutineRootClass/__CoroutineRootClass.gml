@@ -13,6 +13,14 @@ function __CoroutineBegin()
     return _new;
 }
 
+function __CoroutineOnComplete(_function)
+{
+    __COROUTINE_ASSERT_STACK_NOT_EMPTY;
+    
+    //Push this function into the struct at the top of the stack
+    global.__coroutineStack[0].__onCompleteFunction = method(global.__coroutineStack[0], _function);
+}
+
 function __CoroutineFunction(_function)
 {
     __COROUTINE_ASSERT_STACK_NOT_EMPTY;
@@ -31,6 +39,7 @@ function __CoroutinePop()
 function __CoroutineRootClass() constructor
 {
     __functionArray = [];
+    __onCompleteFunction = undefined;
     
     __index = 0;
     __complete = false;
@@ -65,6 +74,12 @@ function __CoroutineRootClass() constructor
     
     static Cancel = function()
     {
+        //Call the CO_ON_COMPLETE function if one exists
+        if (!__complete)
+        {
+            if (is_method(__onCompleteFunction)) __onCompleteFunction();
+        }
+        
         __complete = true;
         __executing = false;
         
@@ -180,6 +195,12 @@ function __CoroutineRootClass() constructor
         }
         
         if (__topLevel) global.__coroutineEscapeState = __COROUTINE_ESCAPE_STATE.__NONE;
+        
+        //Call the CO_ON_COMPLETE function if one exists
+        if (__complete)
+        {
+            if (is_method(__onCompleteFunction)) __onCompleteFunction();
+        }
     }
     
     static __Add = function(_new)
