@@ -71,5 +71,3 @@ function CutsceneFindMyFroggy()
 	CO_END
 }
 ```
-
-This syntax is a little different to normal GML. Of particular note is the use of a few new flow control keywords. `WHILE` you've seen before no doubt (albeit as the lowercase `while` loop command) whereas a lot of the other allcaps commands are new or unfamiliar.
