@@ -79,10 +79,7 @@ function __CoroutineRepeatClass() constructor
                 }
             }
         }
-        until ((global.__coroutineEscapeState > 0)
-           ||  global.__coroutineBreak
-           ||  __complete
-           ||  (get_timer() > global.__coroutineApproxEndTime));
+        until ((global.__coroutineEscapeState > 0) || global.__coroutineBreak || __complete);
         
         //Clean up the BREAK state
         if (global.__coroutineBreak)

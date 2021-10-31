@@ -89,16 +89,9 @@ function __CoroutineIfClass() constructor
             var _function = _functionArray[__index];
             __COROUTINE_TRY_EXECUTING_FUNCTION;
             
-            //Move to the next function
-            if (__index >= array_length(_functionArray))
-            {
-                __complete = true;
-            }
+            if (__index >= array_length(_functionArray)) __complete = true;
         }
-        until ((global.__coroutineEscapeState > 0)
-           ||  global.__coroutineBreak
-           ||  __complete
-           ||  (get_timer() > global.__coroutineApproxEndTime));
+        until ((global.__coroutineEscapeState > 0) || global.__coroutineBreak || __complete);
         
         if (global.__coroutineBreak)
         {

@@ -43,15 +43,11 @@ function __CoroutineRootClass() constructor
     
     __index = 0;
     __complete = false;
-    __continuous = false;
-    __duration = infinity;
     
     __paused = false;
-    __returned = false;
     __returnValue = undefined;
     
     __executing = false;
-    __topLevel = true;
     
     static Get = function()
     {
@@ -70,6 +66,15 @@ function __CoroutineRootClass() constructor
     static GetPaused = function()
     {
         return __paused;
+    }
+    
+    static Pause = function(_returnValue = undefined)
+    {
+        if (!__paused)
+        {
+            __paused = true;
+            __returnValue = _returnValue;
+        }
     }
     
     static Cancel = function()
@@ -92,7 +97,6 @@ function __CoroutineRootClass() constructor
         __complete = false;
         
         __paused = false;
-        __returned = false;
         __returnValue = undefined;
         
         if (!__executing) array_push(global.__coroutineExecuting, self);
@@ -111,33 +115,12 @@ function __CoroutineRootClass() constructor
         return __complete;
     }
     
-    static SetDuration = function(_duration = infinity)
-    {
-        __duration = _duration;
-    }
-    
-    static GetDuration = function()
-    {
-        return __duration;
-    }
-    
-    static SetContinuous = function(_state)
-    {
-        __continuous = _state;
-    }
-    
-    static GetContinuous = function()
-    {
-        return __continuous;
-    }
-    
     static __Run = function()
     {
         //If we're finished or we're paused, we shouldn't run any coroutine code
         if (__complete || __paused) return undefined;
         
         //Set up some global state variables that child classes will read
-        if (__topLevel) global.__coroutineApproxEndTime = get_timer() + __duration;
         global.__coroutineEscapeState = __COROUTINE_ESCAPE_STATE.__NONE;
         global.__coroutineBreak = false;
         global.__coroutineReturnValue = undefined;
@@ -147,28 +130,14 @@ function __CoroutineRootClass() constructor
         {
             //Call the relevant function
             var _function = __functionArray[__index];
-            
             __COROUTINE_TRY_EXECUTING_FUNCTION;
             
-            //Move to the next function
-            if (__index >= array_length(__functionArray))
-            {
-                if (__continuous && !__returned)
-                {
-                    Restart();
-                }
-                else
-                {
-                    __complete = true;
-                }
-            }
+            if (__index >= array_length(__functionArray)) __complete = true;
             
             //Clean up any hanging BREAK commands
             global.__coroutineBreak = false;
         }
-        until ((global.__coroutineEscapeState > 0)
-           ||  __complete
-           ||  (get_timer() > global.__coroutineApproxEndTime));
+        until ((global.__coroutineEscapeState > 0) || __complete);
         
         //Set state based on what escape code we were given
         //This covers YIELD, PAUSE, and RETURN
@@ -183,18 +152,14 @@ function __CoroutineRootClass() constructor
             break;
             
             case __COROUTINE_ESCAPE_STATE.__PAUSE:
-                __paused = true;
-                __returnValue = global.__coroutineReturnValue;
+                Pause(global.__coroutineReturnValue);
             break;
             
             case __COROUTINE_ESCAPE_STATE.__RETURN:
                 __complete = true;
-                __returned = true;
                 __returnValue = global.__coroutineReturnValue;
             break;
         }
-        
-        if (__topLevel) global.__coroutineEscapeState = __COROUTINE_ESCAPE_STATE.__NONE;
         
         //Call the CO_ON_COMPLETE function if one exists
         if (__complete)

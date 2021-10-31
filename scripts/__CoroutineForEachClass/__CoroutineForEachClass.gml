@@ -71,7 +71,6 @@ function __CoroutineForEachClass() constructor
                 {
                     //Ensure that this function is only processed when this FOREACH loop is processed
                     __repeatData.__RemoveFromAutomation();
-                    __repeatData.__topLevel = false;
                     
                     __repeatCount = infinity; //We use different logic for coroutine iterators based on the .Get() method
                     __dataType = 2; //Coroutine
@@ -164,10 +163,7 @@ function __CoroutineForEachClass() constructor
                 }
             }
         }
-        until ((global.__coroutineEscapeState > 0) //TODO - Are we leaking memory if we receive a RETURN escape?
-           ||  global.__coroutineBreak
-           ||  __complete
-           ||  (get_timer() > global.__coroutineApproxEndTime));
+        until ((global.__coroutineEscapeState > 0) || global.__coroutineBreak || __complete); //TODO - Are we leaking memory if we receive a RETURN escape?
         
         //Clean up the BREAK state
         if (global.__coroutineBreak)
