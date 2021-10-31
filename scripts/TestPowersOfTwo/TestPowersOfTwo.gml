@@ -7,6 +7,6 @@ function TestPowersOfTwo(_count)
         REPEAT limit THEN
             YIELD i THEN
             i *= 2;
-        POP
+        END
     CO_END;
 }

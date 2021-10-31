@@ -34,11 +34,11 @@ animationCoroutine = CO_BEGIN
             // YIELD breaks out of the coroutine temporarily
             // Next frame, we return to the coroutine at this position (which continues round the while-loop)
             YIELD
-        POP
+        END
         
         // Once we've animated one piece of text, move on to the next
         i++;
-    POP
+    END
 CO_END;
 
 // The above can be written in a much more compact way:
@@ -51,6 +51,6 @@ CO_END;
 //             data.x = lerp(data.x, data.targetX, 0.2);
 //             data.alpha = min(data.alpha + 0.04, 1.0);
 //             YIELD
-//         POP
-//     POP
+//         END
+//     END
 // CO_END;

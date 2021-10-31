@@ -59,7 +59,7 @@ Let's try something a bit more useful:
         WHILE (oPlayer.x < 500) THEN
             oPlayer.x += 4;
             oEnemy.x += 4;
-        POP
+        END
     CO_END
 
 Here we've used a WHILE macro to create a while-loop inside our coroutine. You can use
@@ -72,11 +72,11 @@ coroutine cannot YIELD, PAUSE, RETURN, or BREAK inside a standard GML repeat() l
 or if-branch; instead, you should use the REPEAT / IF / ELSE / ELSE_IF macros. See the
 __CoroutineSyntax Notes document for more information.
 
-The use of the POP macro at the end of the while-loop is essential. Every WHILE and
-REPEAT command must be matched by a POP command, much like you'd match an open bracket
-and a close bracket. The code defined between WHILE/REPEAT and POP is the looped code.
+The use of the END macro at the end of the while-loop is essential. Every WHILE and
+REPEAT command must be matched by a END command, much like you'd match an open bracket
+and a close bracket. The code defined between WHILE/REPEAT and END is the looped code.
 
-Other flow control macros (AWAIT, DELAY etc.) do not need POP and instead require a
+Other flow control macros (AWAIT, DELAY etc.) do not need END and instead require a
 THEN macro:
 
     example = COROUTINE
@@ -110,7 +110,7 @@ In coroutine syntax, we could write this as:
         REPEAT array_length(array) THEN
             if (array[_i] == target) BREAK;
             _i++;
-        POP;
+        END;
         show_debug_message("Found at index=" + string(_i));
     CO_END
 
@@ -135,7 +135,7 @@ apparatus that wraps around the following calls):
         
         _i++;
     });
-    __CoroutinePop();
+    __CoroutineEndLoop();
     __CoroutineFunction(function()
     {
         show_debug_message("Found at index=" + string(_i));
@@ -162,7 +162,7 @@ starting condition to process.
         return CO_BEGIN
             WHILE (instance.x != target) THEN
                 instance.x += min(target - instance.x, speed);
-            POP
+            END
             // Done!
         CO_END
     }

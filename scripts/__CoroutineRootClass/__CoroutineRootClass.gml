@@ -29,7 +29,7 @@ function __CoroutineFunction(_function)
     global.__coroutineStack[array_length(global.__coroutineStack)-1].__Add(method(global.__coroutineStack[0], _function));
 }
 
-function __CoroutinePop()
+function __CoroutineEndLoop()
 {
     __COROUTINE_ASSERT_STACK_NOT_EMPTY;
     

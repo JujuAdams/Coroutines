@@ -53,11 +53,11 @@ enum __COROUTINE_ESCAPE_STATE
 #macro WHILE                   });__CoroutineWhile(function(){return 
 #macro FOREACH                 });__CoroutineForEach(function(_value){
 #macro IN                      =_value;},function(){return 
-#macro POP                     });__CoroutinePop();__CoroutineFunction(function(){
+#macro END                     });__CoroutineEndLoop();__CoroutineFunction(function(){
 #macro IF                      });__CoroutineIf(function(){return 
 #macro ELSE                    });__CoroutineElse();__CoroutineFunction(function(){
 #macro ELSE_IF                 });__CoroutineElseIf(function(){return 
-#macro END_IF                  });__CoroutinePop();__CoroutineFunction(function(){
+#macro END_IF                  });__CoroutineEndLoop();__CoroutineFunction(function(){
 #macro AWAIT                   });__CoroutineAwait(function(){return 
 #macro DELAY                   });__CoroutineDelay(function(){return 
 #macro AWAIT_ASYNC_HTTP        });__CoroutineAwaitAsync("http",function(){

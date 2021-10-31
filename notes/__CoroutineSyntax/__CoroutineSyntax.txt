@@ -75,7 +75,7 @@ RETURN:
 
 REPEAT:
     Analogous to GameMaker's own repeat() loop. It is not necessary to use this macro in all
-    cases to replace standard repeat() loops. There are two cases where using REPEAT...POP
+    cases to replace standard repeat() loops. There are two cases where using REPEAT...END
     is advised:
     
     1) When the repeat() loop would otherwise contain a YIELD or RETURN command
@@ -85,12 +85,12 @@ REPEAT:
     
         REPEAT <expression> THEN
             //Further operations
-        POP
+        END
 
 
 WHILE:
     Analogous to GameMaker's own while() loop. It is not necessary to use this macro in all
-    cases to replace standard while() loops. There are two cases where using WHILE...POP
+    cases to replace standard while() loops. There are two cases where using WHILE...END
     is advised:
     
     1) When the while() loop would otherwise contain a YIELD or RETURN command
@@ -100,7 +100,7 @@ WHILE:
     
         WHILE <condition> THEN
             //Further operations
-        POP
+        END
 
 
 FOREACH:
@@ -113,10 +113,10 @@ FOREACH:
     
         FOREACH <iteratorVariable> IN <expression> THEN
             //Further operations
-        POP
+        END
 
 
-POP:
+END:
     Necessary to terminate a REPEAT or WHILE or FOREACH loop. It must not be used in other contexts.
 
 
