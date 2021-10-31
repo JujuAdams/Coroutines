@@ -13,4 +13,4 @@ This library allows you to write pauseable functions in GameMaker. These pauseab
 
 Getting coroutines to work in GameMaker is one thing, but making them fun to write required a creative solution. Instead of implementing a slow custom scripting language or editor-side extension to generate coroutine-esque code, this library uses native GML macros to extend GML syntax to accommodate coroutine definitions. You can read all about the new syntax [here](https://github.com/JujuAdams/Coroutines/wiki/Coroutine-Syntax) or understand how and why it works [here](https://github.com/JujuAdams/Coroutines/wiki/How-do-we-extend-GML%3F).
 
-Because this library uses native GML at its core it is cross-platform, requires no additional software, and requires no external Included Files. The base code is MIT Licensed and can be used everywhere, for free, forever.
+Because this library uses native GML at its core it is cross-platform, requires no additional software, and requires no external Included Files. The codebase is MIT Licensed and can be used everywhere, for free, forever.
