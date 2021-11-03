@@ -221,8 +221,8 @@ function __CoroutineCheckSyntax(_me)
         case "TIMEOUT":
             switch(global.__coroutineSyntaxCheckerPrevious)
             {
-                case "ASYNC_TIMEOUT": break;
-                default: __CoroutineError("Syntax error\nExpected \"ASYNC_TIMEOUT\" before \"", _me, "\", but found \"", global.__coroutineSyntaxCheckerPrevious, "\"");
+                case "AWAIT_ASYNC_*": break;
+                default: __CoroutineError("Syntax error\nExpected \"AWAIT_ASYNC_*\" before \"", _me, "\", but found \"", global.__coroutineSyntaxCheckerPrevious, "\"");
             }
         break;
     }
