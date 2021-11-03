@@ -1,8 +1,5 @@
-function __CoroutineBegin()
+function __CoroutineInstantiate()
 {
-    __COROUTINE_ASSERT_STACK_EMPTY;
-    if (__COROUTINES_CHECK_SYNTAX) __CoroutineCheckSyntax("CO_BEGIN");
-    
     if ((global.__coroutineManagerObject != undefined) && !instance_exists(global.__coroutineManagerObject))
     {
         __CoroutineError(object_get_name(global.__coroutineManagerObject), " was created but no longer exists\nPlease check it has not been deactivated");
@@ -12,6 +9,15 @@ function __CoroutineBegin()
     __COROUTINE_PUSH_TO_STACK;
     
     return _new;
+}
+
+function __CoroutineBegin(_function)
+{
+    __COROUTINE_ASSERT_STACK_NOT_EMPTY;
+    if (__COROUTINES_CHECK_SYNTAX) __CoroutineCheckSyntax("CO_BEGIN");
+    
+    //Push this function into the struct at the top of the stack
+    global.__coroutineStack[array_length(global.__coroutineStack)-1].__Add(method(global.__coroutineStack[0], _function));
 }
 
 function __CoroutineEnd()
@@ -31,37 +37,8 @@ function __CoroutineEnd()
     global.__coroutineNext.__Execute();
     
     var _result = global.__coroutineNext;
-    global.__coroutineNext = __CoroutineBegin();
+    global.__coroutineNext = __CoroutineInstantiate();
     return _result;
-}
-
-function __CoroutineOnComplete(_function)
-{
-    __COROUTINE_ASSERT_STACK_NOT_EMPTY;
-    if (__COROUTINES_CHECK_SYNTAX) __CoroutineCheckSyntax("CO_ON_COMPLETE");
-    
-    //Push this function into the struct at the top of the stack
-    global.__coroutineStack[0].__onCompleteFunction = method(global.__coroutineStack[0], _function);
-}
-
-function __CoroutineFunction(_function)
-{
-    __COROUTINE_ASSERT_STACK_NOT_EMPTY;
-    if (__COROUTINES_CHECK_SYNTAX) __CoroutineCheckSyntax("THEN");
-    
-    //Push this function into the struct at the top of the stack
-    global.__coroutineStack[array_length(global.__coroutineStack)-1].__Add(method(global.__coroutineStack[0], _function));
-}
-
-function __CoroutineEndLoop(_function)
-{
-    __COROUTINE_ASSERT_STACK_NOT_EMPTY;
-    if (__COROUTINES_CHECK_SYNTAX) __CoroutineCheckSyntax("END");
-    
-    array_pop(global.__coroutineStack);
-    
-    //Push the follower function into the struct at the top of the stack
-    global.__coroutineStack[array_length(global.__coroutineStack)-1].__Add(method(global.__coroutineStack[0], _function));
 }
 
 function __CoroutineRootClass() constructor

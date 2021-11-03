@@ -14,8 +14,7 @@ enum __COROUTINE_ESCAPE_STATE
     __RETURN
 }
 
-#macro __COROUTINE_ASSERT_STACK_EMPTY  if (array_length(global.__coroutineStack) > 0) __CoroutineError("Cannot define more than one coroutine at a time");
-#macro __COROUTINE_ASSERT_STACK_NOT_EMPTY  if (array_length(global.__coroutineStack) <= 0) __CoroutineError("Must use coroutine function after __CoroutineBegin() and before CoroutineEnd()");
+#macro __COROUTINE_ASSERT_STACK_NOT_EMPTY  if (array_length(global.__coroutineStack) <= 0) __CoroutineError("Must use coroutine function after __CoroutineInstantiate() and before CoroutineEnd()");
 #macro __COROUTINE_PUSH_TO_STACK  array_push(global.__coroutineStack, _new);
 #macro __COROUTINE_PUSH_TO_PARENT  global.__coroutineStack[array_length(global.__coroutineStack)-1].__Add(_new);
 
@@ -34,10 +33,10 @@ enum __COROUTINE_ESCAPE_STATE
 
 #region What hath Science birthed on this Moon-less night
 
-#macro CO_BEGIN                ((function(){__CoroutineFunction(function(){ //FIXME - This will fool the syntax check, "CO_BEGIN" is not detectable
+#macro CO_BEGIN                ((function(){__CoroutineBegin(function(){
 #macro CO_ON_COMPLETE          });__CoroutineOnComplete(function(){
-#macro THEN                    });__CoroutineFunction(function(){
 #macro CO_END                  });return __CoroutineEnd();})());
+#macro THEN                    });__CoroutineThen(function(){
 #macro YIELD                   });__CoroutineEscape(__COROUTINE_ESCAPE_STATE.__YIELD,function(){return 
 #macro PAUSE                   });__CoroutineEscape(__COROUTINE_ESCAPE_STATE.__PAUSE,function(){return 
 #macro RETURN                  });__CoroutineEscape(__COROUTINE_ESCAPE_STATE.__RETURN,function(){return 
@@ -92,7 +91,7 @@ global.__coroutineAwaitingAsync = { //TODO - Is this faster as a map or a struct
 
 
 #macro CO_PARAMS  global.__coroutineNext
-global.__coroutineNext = __CoroutineBegin();
+global.__coroutineNext = __CoroutineInstantiate();
 
 
 
@@ -138,8 +137,8 @@ function __CoroutineCheckSyntax(_me)
         case "CO_END":
             switch(global.__coroutineSyntaxCheckerPrevious)
             {
-                case "THEN": case "END": case "END_IF": case "CO_ON_COMPLETE": break;
-                default: __CoroutineError("Syntax error\nExpected \"THEN\", \"END\", \"END_IF\", or \"CO_ON_COMPLETE\" before \"", _me, "\", but found \"", global.__coroutineSyntaxCheckerPrevious, "\"");
+                case "CO_BEGIN": case "THEN": case "END": case "END_IF": case "CO_ON_COMPLETE": break;
+                default: __CoroutineError("Syntax error\nExpected \"CO_BEGIN\", \"THEN\", \"END\", \"END_IF\", or \"CO_ON_COMPLETE\" before \"", _me, "\", but found \"", global.__coroutineSyntaxCheckerPrevious, "\"");
             }
         break;
         
