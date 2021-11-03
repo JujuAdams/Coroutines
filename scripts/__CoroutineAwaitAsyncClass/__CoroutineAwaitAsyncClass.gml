@@ -1,6 +1,7 @@
 function __CoroutineAwaitAsync(_type, _function, _timeoutFunction)
 {
     __COROUTINE_ASSERT_STACK_NOT_EMPTY;
+    if (__COROUTINES_CHECK_SYNTAX) __CoroutineCheckSyntax("AWAIT_ASYNC_*");
     
     if (_timeoutFunction == undefined)
     {
