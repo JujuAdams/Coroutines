@@ -60,7 +60,7 @@ enum __COROUTINE_ESCAPE_STATE
 #macro AWAIT_ASYNC_DIALOG      });__CoroutineAwaitAsync("dialog",function(){
 #macro AWAIT_ASYNC_SYSTEM      });__CoroutineAwaitAsync("system",function(){
 #macro AWAIT_ASYNC_STEAM       });__CoroutineAwaitAsync("steam",function(){
-#macro TIMEOUT                 },function(){return  //FIXME - This will fool the syntax check, "TIMEOUT" is not detectable
+#macro TIMEOUT                 });__CoroutineAsyncTimeout(function(){return 
 #macro ASYNC_COMPLETE          return true;
 
 #endregion
