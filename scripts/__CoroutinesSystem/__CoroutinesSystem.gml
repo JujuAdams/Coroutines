@@ -41,12 +41,12 @@ enum __COROUTINE_ESCAPE_STATE
 #macro YIELD                   });__CoroutineEscape(__COROUTINE_ESCAPE_STATE.__YIELD,function(){return 
 #macro PAUSE                   });__CoroutineEscape(__COROUTINE_ESCAPE_STATE.__PAUSE,function(){return 
 #macro RETURN                  });__CoroutineEscape(__COROUTINE_ESCAPE_STATE.__RETURN,function(){return 
-#macro BREAK                   });__CoroutineBreak(function(){ //This is a blind function - it is never executed
+#macro BREAK                   });__CoroutineBreak(function(){ //N.B. This opens a blind function - it is never executed
 #macro REPEAT                  });__CoroutineRepeat(function(){return 
 #macro WHILE                   });__CoroutineWhile(function(){return 
 #macro FOREACH                 });__CoroutineForEach(function(_value){
 #macro IN                      =_value;},function(){return  //FIXME - Not detectable by the syntax checker
-#macro END                     });__CoroutineEndLoop();__CoroutineFunction(function(){
+#macro END                     });__CoroutineEndLoop(function(){
 #macro IF                      });__CoroutineIf(function(){return 
 #macro ELSE                    });__CoroutineElse(function(){
 #macro ELSE_IF                 });__CoroutineElseIf(function(){return 

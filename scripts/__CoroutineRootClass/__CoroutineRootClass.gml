@@ -53,12 +53,15 @@ function __CoroutineFunction(_function)
     global.__coroutineStack[array_length(global.__coroutineStack)-1].__Add(method(global.__coroutineStack[0], _function));
 }
 
-function __CoroutineEndLoop()
+function __CoroutineEndLoop(_function)
 {
     __COROUTINE_ASSERT_STACK_NOT_EMPTY;
     if (__COROUTINES_CHECK_SYNTAX) __CoroutineCheckSyntax("END");
     
     array_pop(global.__coroutineStack);
+    
+    //Push the follower function into the struct at the top of the stack
+    global.__coroutineStack[array_length(global.__coroutineStack)-1].__Add(method(global.__coroutineStack[0], _function));
 }
 
 function __CoroutineRootClass() constructor
