@@ -18,4 +18,4 @@ Because this library uses native GML at its core it is cross-platform, requires 
 
 &nbsp;
 
-***Please note** that due to changes made in GMS2.3.6 to async event constant names, GameMaker versions older than 2.3.6 will not compile this library.*
+***Please note** that due to changes made in GMS2.3.6 to async event constant names, you will need to modify library to get it to compile in versions older than v2.3.6.*
