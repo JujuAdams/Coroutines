@@ -1,4 +1,4 @@
-#macro __COROUTINES_VERSION       "0.2.0"
+#macro __COROUTINES_VERSION       "0.2.1"
 #macro __COROUTINES_DATE          "2021-11-03"
 #macro __COROUTINES_CHECK_SYNTAX  true
 
