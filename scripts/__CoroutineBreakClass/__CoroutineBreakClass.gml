@@ -5,7 +5,7 @@ function __CoroutineBreak()
     
     var _new = new __CoroutineBreakClass();
     
-    __COROUTINE_PUSH_TO_STACK;
+    __COROUTINE_PUSH_TO_PARENT;
 }
 
 function __CoroutineBreakClass() constructor
