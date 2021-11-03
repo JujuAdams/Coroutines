@@ -33,7 +33,7 @@ animationCoroutine = CO_BEGIN
             
             // YIELD breaks out of the coroutine temporarily
             // Next frame, we return to the coroutine at this position (which continues round the while-loop)
-            YIELD
+            YIELD THEN
         END
         
         // Once we've animated one piece of text, move on to the next
