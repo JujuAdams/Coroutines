@@ -16,4 +16,6 @@ Getting coroutines to work in GameMaker is one thing, but making them fun to wri
 
 Because this library uses native GML at its core it is cross-platform, requires no additional software, and requires no external Included Files. The codebase is MIT Licensed and can be used everywhere, for free, forever.
 
-**Please note** that due to changes made in GMS2.3.6 to async event constant names, GameMaker versions older than 2.3.6 will not compile this library.
+&nbsp;
+
+***Please note** that due to changes made in GMS2.3.6 to async event constant names, GameMaker versions older than 2.3.6 will not compile this library.*
