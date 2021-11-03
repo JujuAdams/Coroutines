@@ -36,16 +36,7 @@ enum __COROUTINE_ESCAPE_STATE
 
 #macro CO_BEGIN                ((function(){__CoroutineFunction(function(){ //FIXME - This will fool the syntax check, "CO_BEGIN" is not detectable
 #macro CO_ON_COMPLETE          });__CoroutineOnComplete(function(){
-#macro CO_END                  });\
-                               if (array_length(global.__coroutineStack) != 1) __CoroutineError("Illegal stack size (", array_length(global.__coroutineStack), ")");\
-                               if (__COROUTINES_CHECK_SYNTAX) __CoroutineCheckSyntax("CO_END");\
-                               array_resize(global.__coroutineStack, 0);\
-                               global.__coroutineNext.coroutineCreator=self;\
-                               global.__coroutineNext.__Execute();\
-                               var _result = global.__coroutineNext;\
-                               global.__coroutineNext = __CoroutineBegin();\
-                               return _result;\
-                               })())
+#macro CO_END                  });__CoroutineEnd();})());
 #macro THEN                    });__CoroutineFunction(function(){
 #macro YIELD                   });__CoroutineEscape(__COROUTINE_ESCAPE_STATE.__YIELD,function(){return 
 #macro PAUSE                   });__CoroutineEscape(__COROUTINE_ESCAPE_STATE.__PAUSE,function(){return 
@@ -57,9 +48,9 @@ enum __COROUTINE_ESCAPE_STATE
 #macro IN                      =_value;},function(){return  //FIXME - Not detectable by the syntax checker
 #macro END                     });__CoroutineEndLoop();__CoroutineFunction(function(){
 #macro IF                      });__CoroutineIf(function(){return 
-#macro ELSE                    });__CoroutineElse();__CoroutineFunction(function(){ //FIXME - This will fool the syntax check, "END IF" is not detectable
+#macro ELSE                    });__CoroutineElse(function(){
 #macro ELSE_IF                 });__CoroutineElseIf(function(){return 
-#macro END_IF                  });__CoroutineEndIf();__CoroutineFunction(function(){
+#macro END_IF                  });__CoroutineEndIf(function(){
 #macro AWAIT                   });__CoroutineAwait(function(){return 
 #macro DELAY                   });__CoroutineDelay(function(){return 
 #macro AWAIT_ASYNC_HTTP        });__CoroutineAwaitAsync("http",function(){
@@ -140,7 +131,7 @@ function __CoroutineCheckSyntax(_me)
             switch(global.__coroutineSyntaxCheckerPrevious)
             {
                 case "CO_END": break;
-                default: __CoroutineError("Syntax error. Expected \"CO_END\" before \"", _me, "\", but found \"", global.__coroutineSyntaxCheckerPrevious, "\"");
+                default: __CoroutineError("Syntax error\nExpected \"CO_END\" before \"", _me, "\", but found \"", global.__coroutineSyntaxCheckerPrevious, "\"");
             }
         break;
         
@@ -148,7 +139,7 @@ function __CoroutineCheckSyntax(_me)
             switch(global.__coroutineSyntaxCheckerPrevious)
             {
                 case "THEN": case "END": case "END_IF": case "CO_ON_COMPLETE": break;
-                default: __CoroutineError("Syntax error. Expected \"THEN\", \"END\", \"END_IF\", or \"CO_ON_COMPLETE\" before \"", _me, "\", but found \"", global.__coroutineSyntaxCheckerPrevious, "\"");
+                default: __CoroutineError("Syntax error\nExpected \"THEN\", \"END\", \"END_IF\", or \"CO_ON_COMPLETE\" before \"", _me, "\", but found \"", global.__coroutineSyntaxCheckerPrevious, "\"");
             }
         break;
         
@@ -157,7 +148,7 @@ function __CoroutineCheckSyntax(_me)
             {
                 case "CO_BEGIN": case "THEN": case "YIELD": case "PAUSE": case "RETURN": case "END": case "REPEAT": case "WHILE": case "IN": case "BREAK": case "IF": case "ELSE": case "ELSE_IF": case "END_IF": case "AWAIT_ASYNC_*": case "TIMEOUT": case "AWAIT": case "DELAY": break;
                 case "FOREACH": break; //FIXME - Get "IN" to be detectable
-                default: __CoroutineError("Syntax error. Found \"", global.__coroutineSyntaxCheckerPrevious, "\" before \"", _me, "\"");
+                default: __CoroutineError("Syntax error\nFound \"", global.__coroutineSyntaxCheckerPrevious, "\" before \"", _me, "\"");
             }
         break;
         
@@ -165,7 +156,7 @@ function __CoroutineCheckSyntax(_me)
             switch(global.__coroutineSyntaxCheckerPrevious)
             {
                 case "THEN": case "END": case "END_IF": break;
-                default: __CoroutineError("Syntax error. Expected \"THEN\", \"END\", or \"END_IF\" before \"", _me, "\", but found \"", global.__coroutineSyntaxCheckerPrevious, "\"");
+                default: __CoroutineError("Syntax error\nExpected \"THEN\", \"END\", or \"END_IF\" before \"", _me, "\", but found \"", global.__coroutineSyntaxCheckerPrevious, "\"");
             }
         break;
         
@@ -175,31 +166,39 @@ function __CoroutineCheckSyntax(_me)
             switch(global.__coroutineSyntaxCheckerPrevious)
             {
                 case "CO_BEGIN": case "THEN": case "END": case "BREAK": case "END_IF": break;
-                default: __CoroutineError("Syntax error. Expected \"CO_BEGIN\", \"THEN\", \"END\", \"BREAK\", or \"END_IF\" before \"", _me, "\", but found \"", global.__coroutineSyntaxCheckerPrevious, "\"");
+                default: __CoroutineError("Syntax error\nExpected \"CO_BEGIN\", \"THEN\", \"END\", \"BREAK\", or \"END_IF\" before \"", _me, "\", but found \"", global.__coroutineSyntaxCheckerPrevious, "\"");
             }
         break;
         
         case "END":
         case "ELSE":
         case "ELSE_IF":
-        case "END_IF":
             switch(global.__coroutineSyntaxCheckerPrevious)
             {
                 case "THEN": case "END": case "BREAK": case "END_IF": break;
-                default: __CoroutineError("Syntax error. Expected \"THEN\", \"END\", \"BREAK\", or \"END_IF\" before \"", _me, "\", but found \"", global.__coroutineSyntaxCheckerPrevious, "\"");
+                default: __CoroutineError("Syntax error\nExpected \"THEN\", \"END\", \"BREAK\", or \"END_IF\" before \"", _me, "\", but found \"", global.__coroutineSyntaxCheckerPrevious, "\"");
+            }
+        break;
+        
+        case "END_IF":
+            switch(global.__coroutineSyntaxCheckerPrevious)
+            {
+                case "THEN": case "END": case "BREAK": case "ELSE": case "END_IF": break;
+                default: __CoroutineError("Syntax error\nExpected \"THEN\", \"END\", \"BREAK\", \"ELSE\", or \"END_IF\" before \"", _me, "\", but found \"", global.__coroutineSyntaxCheckerPrevious, "\"");
             }
         break;
         
         case "REPEAT":
         case "WHILE":
         case "FOREACH":
+        case "IF":
         case "AWAIT_ASYNC_*":
         case "AWAIT":
         case "DELAY":
             switch(global.__coroutineSyntaxCheckerPrevious)
             {
                 case "CO_BEGIN": case "THEN": case "END": case "BREAK": case "ELSE": case "END_IF": break;
-                default: __CoroutineError("Syntax error. Found \"", global.__coroutineSyntaxCheckerPrevious, "\" before \"", _me, "\"");
+                default: __CoroutineError("Syntax error\nFound \"", global.__coroutineSyntaxCheckerPrevious, "\" before \"", _me, "\"");
             }
         break;
         
@@ -207,7 +206,7 @@ function __CoroutineCheckSyntax(_me)
             switch(global.__coroutineSyntaxCheckerPrevious)
             {
                 case "FOREACH": break;
-                default: __CoroutineError("Syntax error. Expected \"FOREACH\" before \"", _me, "\", but found \"", global.__coroutineSyntaxCheckerPrevious, "\"");
+                default: __CoroutineError("Syntax error\nExpected \"FOREACH\" before \"", _me, "\", but found \"", global.__coroutineSyntaxCheckerPrevious, "\"");
             }
         break;
         
@@ -215,15 +214,7 @@ function __CoroutineCheckSyntax(_me)
             switch(global.__coroutineSyntaxCheckerPrevious)
             {
                 case "THEN": case "END": case "BREAK": case "ELSE": case "END_IF": break;
-                default: __CoroutineError("Syntax error. Expected \"THEN\", \"END\", \"BREAK\", \"ELSE\", or \"END_IF\" before \"", _me, "\", but found \"", global.__coroutineSyntaxCheckerPrevious, "\"");
-            }
-        break;
-        
-        case "IF":
-            switch(global.__coroutineSyntaxCheckerPrevious)
-            {
-                case "CO_BEGIN": case "THEN": case "END": case "BREAK": case "END_IF": break;
-                default: __CoroutineError("Syntax error. Expected \"CO_BEGIN\", \"THEN\", \"END\", \"BREAK\", \"ELSE\", or \"END_IF\" before \"", _me, "\", but found \"", global.__coroutineSyntaxCheckerPrevious, "\"");
+                default: __CoroutineError("Syntax error\nExpected \"THEN\", \"END\", \"BREAK\", \"ELSE\", or \"END_IF\" before \"", _me, "\", but found \"", global.__coroutineSyntaxCheckerPrevious, "\"");
             }
         break;
         
@@ -231,7 +222,7 @@ function __CoroutineCheckSyntax(_me)
             switch(global.__coroutineSyntaxCheckerPrevious)
             {
                 case "ASYNC_TIMEOUT": break;
-                default: __CoroutineError("Syntax error. Expected \"ASYNC_TIMEOUT\" before \"", _me, "\", but found \"", global.__coroutineSyntaxCheckerPrevious, "\"");
+                default: __CoroutineError("Syntax error\nExpected \"ASYNC_TIMEOUT\" before \"", _me, "\", but found \"", global.__coroutineSyntaxCheckerPrevious, "\"");
             }
         break;
     }

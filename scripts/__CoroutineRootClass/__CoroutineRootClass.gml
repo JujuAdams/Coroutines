@@ -14,6 +14,27 @@ function __CoroutineBegin()
     return _new;
 }
 
+function __CoroutineEnd()
+{
+    if (array_length(global.__coroutineStack) != 1)
+    {
+        var _string  = "Command stack is still open. Some common syntax errors to check for are:\n"
+            _string += "- Every REPEAT, WHILE, and FOREACH loop must have a matching END command\n"
+            _string += "- Every IF command must have a matching END_IF command\n"
+            _string += "- \"ELSE IF\" (with a space) is invalid, use \"ELSE_IF\" instead";
+        __CoroutineError(_string);
+    }
+    
+    if (__COROUTINES_CHECK_SYNTAX) __CoroutineCheckSyntax("CO_END");
+    array_resize(global.__coroutineStack, 0);
+    global.__coroutineNext.coroutineCreator = self;
+    global.__coroutineNext.__Execute();
+    
+    var _result = global.__coroutineNext;
+    global.__coroutineNext = __CoroutineBegin();
+    return _result;
+}
+
 function __CoroutineOnComplete(_function)
 {
     __COROUTINE_ASSERT_STACK_NOT_EMPTY;

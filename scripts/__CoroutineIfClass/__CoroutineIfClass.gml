@@ -20,20 +20,26 @@ function __CoroutineElseIf(_conditionFunction)
     global.__coroutineStack[array_length(global.__coroutineStack)-1].__AddBranch(method(global.__coroutineStack[0], _conditionFunction));
 }
 
-function __CoroutineElse()
+function __CoroutineElse(_function)
 {
     __COROUTINE_ASSERT_STACK_NOT_EMPTY;
     if (__COROUTINES_CHECK_SYNTAX) __CoroutineCheckSyntax("ELSE");
     
     global.__coroutineStack[array_length(global.__coroutineStack)-1].__AddBranch(undefined);
+    
+    //Push the follower function into the struct at the top of the stack
+    global.__coroutineStack[array_length(global.__coroutineStack)-1].__Add(method(global.__coroutineStack[0], _function));
 }
 
-function __CoroutineEndIf()
+function __CoroutineEndIf(_function)
 {
     __COROUTINE_ASSERT_STACK_NOT_EMPTY;
     if (__COROUTINES_CHECK_SYNTAX) __CoroutineCheckSyntax("END_IF");
     
     array_pop(global.__coroutineStack);
+    
+    //Push the follower function into the struct at the top of the stack
+    global.__coroutineStack[array_length(global.__coroutineStack)-1].__Add(method(global.__coroutineStack[0], _function));
 }
 
 function __CoroutineIfClass() constructor
