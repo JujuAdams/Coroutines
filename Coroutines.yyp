@@ -1,10 +1,11 @@
 {
   "resources": [
+    {"id":{"name":"oTestIf","path":"objects/oTestIf/oTestIf.yy",},"order":3,},
     {"id":{"name":"ExampleFetchURL","path":"scripts/ExampleFetchURL/ExampleFetchURL.yy",},"order":1,},
     {"id":{"name":"__CoroutineRootClass","path":"scripts/__CoroutineRootClass/__CoroutineRootClass.yy",},"order":1,},
     {"id":{"name":"oTest","path":"objects/oTest/oTest.yy",},"order":0,},
     {"id":{"name":"__CoroutineAwaitClass","path":"scripts/__CoroutineAwaitClass/__CoroutineAwaitClass.yy",},"order":7,},
-    {"id":{"name":"TestPowersOfTwo","path":"scripts/TestPowersOfTwo/TestPowersOfTwo.yy",},"order":3,},
+    {"id":{"name":"TestPowersOfTwo","path":"scripts/TestPowersOfTwo/TestPowersOfTwo.yy",},"order":5,},
     {"id":{"name":"__CoroutineDelayClass","path":"scripts/__CoroutineDelayClass/__CoroutineDelayClass.yy",},"order":8,},
     {"id":{"name":"__CoroutineIfClass","path":"scripts/__CoroutineIfClass/__CoroutineIfClass.yy",},"order":5,},
     {"id":{"name":"__CoroutineWhileClass","path":"scripts/__CoroutineWhileClass/__CoroutineWhileClass.yy",},"order":3,},
@@ -62,7 +63,7 @@
   ],
   "IncludedFiles": [],
   "MetaData": {
-    "IDEVersion": "2.3.5.589",
+    "IDEVersion": "2.3.6.595",
   },
   "resourceVersion": "1.4",
   "name": "Coroutines",
