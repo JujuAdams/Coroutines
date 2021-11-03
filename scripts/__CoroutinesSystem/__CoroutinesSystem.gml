@@ -36,8 +36,8 @@ enum __COROUTINE_ESCAPE_STATE
 
 #macro CO_BEGIN                ((function(){__CoroutineFunction(function(){ //FIXME - This will fool the syntax check, "CO_BEGIN" is not detectable
 #macro CO_ON_COMPLETE          });__CoroutineOnComplete(function(){
-#macro CO_END                  });__CoroutineEnd();})());
 #macro THEN                    });__CoroutineFunction(function(){
+#macro CO_END                  });return __CoroutineEnd();})());
 #macro YIELD                   });__CoroutineEscape(__COROUTINE_ESCAPE_STATE.__YIELD,function(){return 
 #macro PAUSE                   });__CoroutineEscape(__COROUTINE_ESCAPE_STATE.__PAUSE,function(){return 
 #macro RETURN                  });__CoroutineEscape(__COROUTINE_ESCAPE_STATE.__RETURN,function(){return 
