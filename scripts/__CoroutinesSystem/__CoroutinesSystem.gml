@@ -45,7 +45,7 @@ enum __COROUTINE_ESCAPE_STATE
 #macro REPEAT                  });__CoroutineRepeat(function(){return 
 #macro WHILE                   });__CoroutineWhile(function(){return 
 #macro FOREACH                 });__CoroutineForEach(function(_value){
-#macro IN                      =_value;},function(){return  //FIXME - Not detectable by the syntax checker
+#macro IN                      =_value;});__CoroutineForEachIn(function(){return 
 #macro END                     });__CoroutineEndLoop(function(){
 #macro IF                      });__CoroutineIf(function(){return 
 #macro ELSE                    });__CoroutineElse(function(){
