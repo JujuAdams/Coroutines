@@ -1,18 +1,11 @@
-function __CoroutineAwaitAsync(_type, _function, _timeoutFunction)
+function __CoroutineAwaitAsync(_type, _function)
 {
     __COROUTINE_ASSERT_STACK_NOT_EMPTY;
     if (__COROUTINES_CHECK_SYNTAX) __CoroutineCheckSyntax("AWAIT_ASYNC_*");
     
-    if (_timeoutFunction == undefined)
-    {
-        //By default,  operations never time out
-        _timeoutFunction = function() { return infinity };
-    }
-    
     var _new = new __CoroutineAwaitAsyncClass();
     _new.__type = _type;
     _new.__function = method(global.__coroutineStack[0], _function);
-    _new.__timeoutFunction = method(global.__coroutineStack[0], _timeoutFunction);
     
     __COROUTINE_PUSH_TO_PARENT;
 }
@@ -58,7 +51,7 @@ function __CoroutineAwaitAsyncClass() constructor
             array_push(_array, self);
         }
         
-        if (current_time - __startTime > __timeoutFunction())
+        if (is_method(__timeoutFunction) && (current_time - __startTime > __timeoutFunction()))
         {
             try
             {

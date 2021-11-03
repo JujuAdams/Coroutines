@@ -1,6 +1,7 @@
 {
   "resources": [
     {"id":{"name":"oTestIf","path":"objects/oTestIf/oTestIf.yy",},"order":3,},
+    {"id":{"name":"__CoroutineAsyncTimeout","path":"scripts/__CoroutineAsyncTimeout/__CoroutineAsyncTimeout.yy",},"order":10,},
     {"id":{"name":"ExampleFetchURL","path":"scripts/ExampleFetchURL/ExampleFetchURL.yy",},"order":1,},
     {"id":{"name":"__CoroutineRootClass","path":"scripts/__CoroutineRootClass/__CoroutineRootClass.yy",},"order":1,},
     {"id":{"name":"oTest","path":"objects/oTest/oTest.yy",},"order":0,},
