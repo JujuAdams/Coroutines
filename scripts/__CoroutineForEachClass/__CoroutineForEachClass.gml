@@ -1,6 +1,5 @@
 function __CoroutineForEach(_setterFunction)
 {
-    __COROUTINE_ASSERT_STACK_NOT_EMPTY;
     if (__COROUTINES_CHECK_SYNTAX) __CoroutineCheckSyntax("FOREACH");
     
     var _new = new __CoroutineForEachClass();
@@ -12,7 +11,6 @@ function __CoroutineForEach(_setterFunction)
 
 function __CoroutineForEachIn(_function)
 {
-    __COROUTINE_ASSERT_STACK_NOT_EMPTY;
     if (__COROUTINES_CHECK_SYNTAX) __CoroutineCheckSyntax("IN");
     
     //Set the data function for the previous command on the stack

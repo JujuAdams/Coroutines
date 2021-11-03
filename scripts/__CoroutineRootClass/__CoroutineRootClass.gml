@@ -13,7 +13,6 @@ function __CoroutineInstantiate()
 
 function __CoroutineBegin(_function)
 {
-    __COROUTINE_ASSERT_STACK_NOT_EMPTY;
     if (__COROUTINES_CHECK_SYNTAX) __CoroutineCheckSyntax("CO_BEGIN");
     
     //Push this function into the struct at the top of the stack

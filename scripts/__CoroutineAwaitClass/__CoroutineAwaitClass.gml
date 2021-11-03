@@ -1,6 +1,5 @@
 function __CoroutineAwait(_function)
 {
-    __COROUTINE_ASSERT_STACK_NOT_EMPTY;
     if (__COROUTINES_CHECK_SYNTAX) __CoroutineCheckSyntax("AWAIT");
     
     var _new = new __CoroutineAwaitClass();

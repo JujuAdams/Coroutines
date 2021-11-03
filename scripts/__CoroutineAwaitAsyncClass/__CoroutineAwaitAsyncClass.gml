@@ -1,6 +1,5 @@
 function __CoroutineAwaitAsync(_type, _function)
 {
-    __COROUTINE_ASSERT_STACK_NOT_EMPTY;
     if (__COROUTINES_CHECK_SYNTAX) __CoroutineCheckSyntax("AWAIT_ASYNC_*");
     
     var _new = new __CoroutineAwaitAsyncClass();
@@ -12,7 +11,6 @@ function __CoroutineAwaitAsync(_type, _function)
 
 function __CoroutineAsyncTimeout(_function)
 {
-    __COROUTINE_ASSERT_STACK_NOT_EMPTY;
     if (__COROUTINES_CHECK_SYNTAX) __CoroutineCheckSyntax("TIMEOUT");
     
     //Set the timeout function for the previous command on the stack

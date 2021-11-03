@@ -14,7 +14,6 @@ enum __COROUTINE_ESCAPE_STATE
     __RETURN
 }
 
-#macro __COROUTINE_ASSERT_STACK_NOT_EMPTY  if (array_length(global.__coroutineStack) <= 0) __CoroutineError("Must use coroutine function after __CoroutineInstantiate() and before CoroutineEnd()");
 #macro __COROUTINE_PUSH_TO_STACK  array_push(global.__coroutineStack, _new);
 #macro __COROUTINE_PUSH_TO_PARENT  global.__coroutineStack[array_length(global.__coroutineStack)-1].__Add(_new);
 

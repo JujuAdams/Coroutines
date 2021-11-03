@@ -1,6 +1,5 @@
 function __CoroutineIf(_conditionFunction)
 {
-    __COROUTINE_ASSERT_STACK_NOT_EMPTY;
     if (__COROUTINES_CHECK_SYNTAX) __CoroutineCheckSyntax("IF");
     
     //TODO - Check for "ELSE IF" rather than the correct "ELSE_IF"
@@ -14,7 +13,6 @@ function __CoroutineIf(_conditionFunction)
 
 function __CoroutineElseIf(_conditionFunction)
 {
-    __COROUTINE_ASSERT_STACK_NOT_EMPTY;
     if (__COROUTINES_CHECK_SYNTAX) __CoroutineCheckSyntax("ELSE_IF");
     
     global.__coroutineStack[array_length(global.__coroutineStack)-1].__AddBranch(method(global.__coroutineStack[0], _conditionFunction));
@@ -22,7 +20,6 @@ function __CoroutineElseIf(_conditionFunction)
 
 function __CoroutineElse(_function)
 {
-    __COROUTINE_ASSERT_STACK_NOT_EMPTY;
     if (__COROUTINES_CHECK_SYNTAX) __CoroutineCheckSyntax("ELSE");
     
     global.__coroutineStack[array_length(global.__coroutineStack)-1].__AddBranch(undefined);
@@ -33,7 +30,6 @@ function __CoroutineElse(_function)
 
 function __CoroutineEndIf(_function)
 {
-    __COROUTINE_ASSERT_STACK_NOT_EMPTY;
     if (__COROUTINES_CHECK_SYNTAX) __CoroutineCheckSyntax("END_IF");
     
     array_pop(global.__coroutineStack);

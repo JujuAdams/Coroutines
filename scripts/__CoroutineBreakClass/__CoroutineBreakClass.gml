@@ -1,6 +1,5 @@
 function __CoroutineBreak()
 {
-    __COROUTINE_ASSERT_STACK_NOT_EMPTY;
     if (__COROUTINES_CHECK_SYNTAX) __CoroutineCheckSyntax("BREAK");
     
     var _new = new __CoroutineBreakClass();
