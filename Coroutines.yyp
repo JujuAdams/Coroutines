@@ -57,7 +57,7 @@
   "Folders": [
     {"folderPath":"folders/Coroutines.yy","order":0,"resourceVersion":"1.0","name":"Coroutines","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Coroutines/(System).yy","order":4,"resourceVersion":"1.0","name":"(System)","tags":[],"resourceType":"GMFolder",},
-    {"folderPath":"folders/Coroutines/(System)/Tapping your head + rubbing your tummy is coroutines.yy","order":0,"resourceVersion":"1.0","name":"Tapping your head + rubbing your tummy is coroutines","tags":[],"resourceType":"GMFolder",},
+    {"folderPath":"folders/Coroutines/(System)/Tapping your head + rubbing your tummy is two coroutines.yy","order":0,"resourceVersion":"1.0","name":"Tapping your head + rubbing your tummy is two coroutines","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Examples.yy","order":3,"resourceVersion":"1.0","name":"Examples","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Test Cases.yy","order":6,"resourceVersion":"1.0","name":"Test Cases","tags":[],"resourceType":"GMFolder",},
   ],
