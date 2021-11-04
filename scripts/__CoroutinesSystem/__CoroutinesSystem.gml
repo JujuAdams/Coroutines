@@ -1,6 +1,5 @@
-#macro __COROUTINES_VERSION       "0.2.1"
-#macro __COROUTINES_DATE          "2021-11-03"
-#macro __COROUTINES_CHECK_SYNTAX  true
+#macro __COROUTINES_VERSION  "0.2.1"
+#macro __COROUTINES_DATE     "2021-11-03"
 
 show_debug_message("Welcome to Coroutines by @jujuadams! This is version " + __COROUTINES_VERSION + ", " + __COROUTINES_DATE);
 
@@ -27,41 +26,6 @@ enum __COROUTINE_ESCAPE_STATE
                                                _function.__Run();\
                                                if (_function.__complete) __index++;\
                                            }
-
-
-
-#region What hath Science birthed on this Moon-less night
-
-#macro CO_BEGIN                __CoroutineGetNext();(function(){__CoroutineBegin(function(){ //__CoroutineGetNext() is required to work around GM compiler bug (https://github.com/JujuAdams/Coroutines/issues/7)
-#macro CO_ON_COMPLETE          });__CoroutineOnComplete(function(){
-#macro CO_END                  });return __CoroutineEnd();})();
-#macro THEN                    });__CoroutineThen(function(){
-#macro YIELD                   });__CoroutineEscape(__COROUTINE_ESCAPE_STATE.__YIELD,function(){return 
-#macro PAUSE                   });__CoroutineEscape(__COROUTINE_ESCAPE_STATE.__PAUSE,function(){return 
-#macro RETURN                  });__CoroutineEscape(__COROUTINE_ESCAPE_STATE.__RETURN,function(){return 
-#macro BREAK                   });__CoroutineBreak(function(){ //N.B. This opens a blind function - it is never executed
-#macro REPEAT                  });__CoroutineRepeat(function(){return 
-#macro WHILE                   });__CoroutineWhile(function(){return 
-#macro FOREACH                 });__CoroutineForEach(function(_value){
-#macro IN                      =_value;});__CoroutineForEachIn(function(){return 
-#macro END                     });__CoroutineEndLoop(function(){
-#macro IF                      });__CoroutineIf(function(){return 
-#macro ELSE                    });__CoroutineElse(function(){
-#macro ELSE_IF                 });__CoroutineElseIf(function(){return 
-#macro END_IF                  });__CoroutineEndIf(function(){
-#macro AWAIT                   });__CoroutineAwait(function(){return 
-#macro DELAY                   });__CoroutineDelay(function(){return 
-#macro AWAIT_ASYNC_HTTP        });__CoroutineAwaitAsync("http",function(){
-#macro AWAIT_ASYNC_NETWORKING  });__CoroutineAwaitAsync("networking",function(){
-#macro AWAIT_ASYNC_SOCIAL      });__CoroutineAwaitAsync("social",function(){
-#macro AWAIT_ASYNC_SAVE_LOAD   });__CoroutineAwaitAsync("save_load",function(){
-#macro AWAIT_ASYNC_DIALOG      });__CoroutineAwaitAsync("dialog",function(){
-#macro AWAIT_ASYNC_SYSTEM      });__CoroutineAwaitAsync("system",function(){
-#macro AWAIT_ASYNC_STEAM       });__CoroutineAwaitAsync("steam",function(){
-#macro TIMEOUT                 });__CoroutineAsyncTimeout(function(){return 
-#macro ASYNC_COMPLETE          return true;
-
-#endregion
 
 
 

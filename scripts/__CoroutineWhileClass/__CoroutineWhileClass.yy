@@ -2,8 +2,8 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Nothing to see here, move along",
-    "path": "folders/Coroutines/(System)/Nothing to see here, move along.yy",
+    "name": "Tapping your head + rubbing your tummy is coroutines",
+    "path": "folders/Coroutines/(System)/Tapping your head + rubbing your tummy is coroutines.yy",
   },
   "resourceVersion": "1.0",
   "name": "__CoroutineWhileClass",

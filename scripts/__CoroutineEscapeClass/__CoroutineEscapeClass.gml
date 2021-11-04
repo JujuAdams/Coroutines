@@ -1,6 +1,6 @@
 function __CoroutineEscape(_escapeState, _function)
 {
-    if (__COROUTINES_CHECK_SYNTAX)
+    if (COROUTINES_CHECK_SYNTAX)
     {
         switch(_escapeState)
         {

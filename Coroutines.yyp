@@ -25,6 +25,7 @@
     {"id":{"name":"__CoroutineForEachClass","path":"scripts/__CoroutineForEachClass/__CoroutineForEachClass.yy",},"order":5,},
     {"id":{"name":"oTestBreak","path":"objects/oTestBreak/oTestBreak.yy",},"order":5,},
     {"id":{"name":"oTestAsyncHTTP","path":"objects/oTestAsyncHTTP/oTestAsyncHTTP.yy",},"order":4,},
+    {"id":{"name":"__CoroutinesConfig","path":"scripts/__CoroutinesConfig/__CoroutinesConfig.yy",},"order":3,},
     {"id":{"name":"rmMain","path":"rooms/rmMain/rmMain.yy",},"order":2,},
   ],
   "Options": [
@@ -55,8 +56,8 @@
   ],
   "Folders": [
     {"folderPath":"folders/Coroutines.yy","order":0,"resourceVersion":"1.0","name":"Coroutines","tags":[],"resourceType":"GMFolder",},
-    {"folderPath":"folders/Coroutines/(System).yy","order":3,"resourceVersion":"1.0","name":"(System)","tags":[],"resourceType":"GMFolder",},
-    {"folderPath":"folders/Coroutines/(System)/Nothing to see here, move along.yy","order":0,"resourceVersion":"1.0","name":"Nothing to see here, move along","tags":[],"resourceType":"GMFolder",},
+    {"folderPath":"folders/Coroutines/(System).yy","order":4,"resourceVersion":"1.0","name":"(System)","tags":[],"resourceType":"GMFolder",},
+    {"folderPath":"folders/Coroutines/(System)/Tapping your head + rubbing your tummy is coroutines.yy","order":0,"resourceVersion":"1.0","name":"Tapping your head + rubbing your tummy is coroutines","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Examples.yy","order":3,"resourceVersion":"1.0","name":"Examples","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Test Cases.yy","order":6,"resourceVersion":"1.0","name":"Test Cases","tags":[],"resourceType":"GMFolder",},
   ],

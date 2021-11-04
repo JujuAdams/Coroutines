@@ -1,6 +1,6 @@
 function __CoroutineAwait(_function)
 {
-    if (__COROUTINES_CHECK_SYNTAX) __CoroutineCheckSyntax("AWAIT");
+    if (COROUTINES_CHECK_SYNTAX) __CoroutineCheckSyntax("AWAIT");
     
     var _new = new __CoroutineAwaitClass();
     _new.__function = method(global.__coroutineStack[0], _function);

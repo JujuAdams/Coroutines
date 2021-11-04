@@ -1,6 +1,6 @@
 function __CoroutineDelay(_delayFunction)
 {
-    if (__COROUTINES_CHECK_SYNTAX) __CoroutineCheckSyntax("DELAY");
+    if (COROUTINES_CHECK_SYNTAX) __CoroutineCheckSyntax("DELAY");
     
     var _new = new __CoroutineDelayClass();
     _new.__delayFunction = method(global.__coroutineStack[0], _delayFunction);

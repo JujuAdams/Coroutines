@@ -1,6 +1,6 @@
 function __CoroutineWhile(_conditionFunction)
 {
-    if (__COROUTINES_CHECK_SYNTAX) __CoroutineCheckSyntax("WHILE");
+    if (COROUTINES_CHECK_SYNTAX) __CoroutineCheckSyntax("WHILE");
     
     var _new = new __CoroutineWhileClass();
     _new.__whileFunction = method(global.__coroutineStack[0], _conditionFunction);

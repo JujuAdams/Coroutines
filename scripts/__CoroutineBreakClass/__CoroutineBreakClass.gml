@@ -1,6 +1,6 @@
 function __CoroutineBreak()
 {
-    if (__COROUTINES_CHECK_SYNTAX) __CoroutineCheckSyntax("BREAK");
+    if (COROUTINES_CHECK_SYNTAX) __CoroutineCheckSyntax("BREAK");
     
     var _new = new __CoroutineBreakClass();
     

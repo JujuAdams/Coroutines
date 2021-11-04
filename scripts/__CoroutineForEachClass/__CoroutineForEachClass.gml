@@ -1,6 +1,6 @@
 function __CoroutineForEach(_setterFunction)
 {
-    if (__COROUTINES_CHECK_SYNTAX) __CoroutineCheckSyntax("FOREACH");
+    if (COROUTINES_CHECK_SYNTAX) __CoroutineCheckSyntax("FOREACH");
     
     var _new = new __CoroutineForEachClass();
     _new.__setterFunction = method(global.__coroutineStack[0], _setterFunction);
@@ -11,7 +11,7 @@ function __CoroutineForEach(_setterFunction)
 
 function __CoroutineForEachIn(_function)
 {
-    if (__COROUTINES_CHECK_SYNTAX) __CoroutineCheckSyntax("IN");
+    if (COROUTINES_CHECK_SYNTAX) __CoroutineCheckSyntax("IN");
     
     //Set the data function for the previous command on the stack
     //This is hopefully a FOREACH command!

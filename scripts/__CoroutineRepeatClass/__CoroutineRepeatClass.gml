@@ -1,6 +1,6 @@
 function __CoroutineRepeat(_countFunction)
 {
-    if (__COROUTINES_CHECK_SYNTAX) __CoroutineCheckSyntax("REPEAT");
+    if (COROUTINES_CHECK_SYNTAX) __CoroutineCheckSyntax("REPEAT");
     
     var _new = new __CoroutineRepeatClass();
     _new.__repeatsFunction = method(global.__coroutineStack[0], _countFunction);
