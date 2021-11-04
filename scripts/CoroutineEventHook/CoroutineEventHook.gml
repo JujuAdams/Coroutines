@@ -1,3 +1,16 @@
+/// This function *must* be called once per frame in a Step event or corouintes will,
+/// not execute. This is typically done by calling this function in the Step event of
+/// a persistent instance. Be careful that instance doesn't get deactivated if you're
+/// using instance deactivation in your game!
+/// 
+/// If you're using AWAIT_ASYNC_* calls, this function will also need to be placed in
+/// the relevant async events in a persistent instance, with the above caveats.
+/// 
+/// If you don't want to handle all this yourself, you can place down an instance of
+/// oCoroutineManager in the first room in your game (the one with the house icon)
+/// and it'll take care of everything for you. You will still need to keep an eye
+/// on instance deactivation though ;)
+
 function CoroutineEventHook()
 {
     if ((event_type == ev_step) || (event_type == ev_draw))
