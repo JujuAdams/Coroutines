@@ -4,6 +4,10 @@
 // if you're finding that the syntax checker isn't being helpful:
 //   1) Make a bug report! The problem is fixable: https://github.com/JujuAdams/Coroutines/issues
 //   2) Turn off this macro
+// Additionally, runtime syntax checking carries a small performance penalty when
+// creating a coroutine. If you feel like you need a little more speed, and once you've
+// tested your game fully, you may want to set this macro to false to reclaim a little
+// CPU time.
 #macro COROUTINES_CHECK_SYNTAX  true
 
 // Controls the default cancellation behaviour for coroutines when their creator is
