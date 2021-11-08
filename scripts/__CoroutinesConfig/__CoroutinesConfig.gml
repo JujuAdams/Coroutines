@@ -1,7 +1,7 @@
 // Whether to perform runtime syntax checking on coroutines. This carries a performance
 // penalty when starting coroutines, but not when executing them. Syntax checking is,
-// furthermore, something of an experimental feature. It may throw false negatives
-// If you're finding that the syntax checker isn't being helpful:
+// furthermore, something of an experimental feature. It may throw false negatives so
+// if you're finding that the syntax checker isn't being helpful:
 //   1) Make a bug report! The problem is fixable: https://github.com/JujuAdams/Coroutines/issues
 //   2) Turn off this macro
 #macro COROUTINES_CHECK_SYNTAX  true
@@ -9,6 +9,9 @@
 // Controls the default cancellation behaviour for coroutines when their creator is
 // destroyed or garbage collected. Whether or not a specific coroutines is cancelled
 // when orphaned can also be controlled using the .CancelWhenOrphaned() method.
+// 
+// N.B. A deactivated instance counts as a non-existent instance.
+// 
 #macro COROUTINES_DEFAULT_CANCEL_WHEN_ORPHANED  false
 
 // This macro is related to the one above. If you're creating a coroutine in the scope
