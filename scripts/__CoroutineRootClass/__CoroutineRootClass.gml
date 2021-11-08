@@ -37,7 +37,31 @@ function __CoroutineEnd()
     
     if (COROUTINES_CHECK_SYNTAX) __CoroutineCheckSyntax("CO_END");
     array_resize(global.__coroutineStack, 0);
-    global.__coroutineNext.coroutineCreator = self;
+    
+    if (is_struct(self))
+    {
+        global.__coroutineNext.__creatorIsStruct = true;
+            
+        if (global.__coroutineNext.__creatorIsWeakReference)
+        {
+            global.__coroutineNext.__creator = weak_ref_create(self);
+        }
+        else
+        {
+            global.__coroutineNext.__creator = self;
+        }
+    }
+    else if (instance_exists(self))
+    {
+        global.__coroutineNext.__creator = self;
+        global.__coroutineNext.__creatorIsStruct = false;
+        global.__coroutineNext.__creatorIsWeakReference = false;
+    }
+    else
+    {
+        __CoroutineError("Creator scope neither a struct nor an instance\nCheck that this scope has not been deactivated somehow");
+    }
+    
     global.__coroutineNext.__Execute();
     
     var _result = global.__coroutineNext;
@@ -55,12 +79,28 @@ function __CoroutineRootClass() constructor
     
     __paused = false;
     __returnValue = undefined;
-    
     __executing = false;
+    
+    __creator = undefined;
+    __creatorIsStruct = undefined;
+    __creatorIsWeakReference = COROUTINES_DEFAULT_CREATOR_WEAK_REFERENCE;
+    __cancelWhenOrphaned = COROUTINES_DEFAULT_CANCEL_WHEN_ORPHANED;
     
     static Get = function()
     {
         return __returnValue;
+    }
+    
+    static GetCreator = function()
+    {
+        if (__creatorIsWeakReference)
+        {
+            return __creator.ref;
+        }
+        else
+        {
+            return __creator;
+        }
     }
     
     static Resume = function()
@@ -124,8 +164,60 @@ function __CoroutineRootClass() constructor
         return __complete;
     }
     
+    static WeakReference = function(_state)
+    {
+        if (__creatorIsStruct)
+        {
+            if (_state && !__creatorIsWeakReference)
+            {
+                // Turn a strong reference into a weak reference
+                __creator = weak_ref_create(__creator);
+                __creatorIsWeakReference = true;
+            }
+            else if (!_state && __creatorIsWeakReference)
+            {
+                // Turn a weak reference into a strong reference
+                if (weak_ref_alive(__creator))
+                {
+                    __creator = __creator.ref;
+                    __creatorIsWeakReference = false;
+                }
+                else
+                {
+                    __CoroutineTrace("Warning! Cannot convert weak reference to strong reference, creator has been garbage collected");
+                }
+            }
+        }
+        else
+        {
+            if (!_state) __CoroutineTrace("Warning! Coroutines created by object instances cannot be \"strong\" references");
+        }
+    }
+    
+    static CancelWhenOrphaned = function(_state)
+    {
+        __cancelWhenOrphaned = _state;
+    }
+    
     static __Run = function()
     {
+        if (__cancelWhenOrphaned)
+        {
+            if (__creatorIsStruct)
+            {
+                if (__creatorIsWeakReference && !weak_ref_alive(__creator))
+                {
+                    Cancel();
+                    return undefined;
+                }
+            }
+            else if (!instance_exists(__creator))
+            {
+                Cancel();
+                return undefined;
+            }
+        }
+        
         //If we're finished or we're paused, we shouldn't run any coroutine code
         if (__complete || __paused) return undefined;
         

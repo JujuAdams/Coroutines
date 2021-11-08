@@ -16,13 +16,13 @@ animationCoroutine = CO_BEGIN
     // Set up our iterator, and iterate over every text entry in the array
     i = 0;
     
-    // <coroutineCreator> is a special variable in every coroutine that refers to the
+    // .GetCreator() is a special method in every coroutine that returns the
     // instance/struct that created the coroutine. Whilst code inside a coroutine
     // runs in its own scope, its often useful to have a coroutine affect data stored
     // in a specific instance/struct
-    REPEAT array_length(coroutineCreator.textArray) THEN
+    REPEAT array_length(GetCreator().textArray) THEN
         
-        data = coroutineCreator.textArray[i];
+        data = GetCreator().textArray[i];
         
         // Go around this loop until this specific piece of text is at 100% alpha and in the correct position
         WHILE (data.alpha < 1) or (data.x < data.targetX) THEN
@@ -45,8 +45,8 @@ CO_END;
 // 
 // CO_BEGIN
 //     DELAY 300 THEN
-//     FOREACH data IN coroutineCreator.textArray THEN
-//         data = coroutineCreator.textArray[i];
+//     FOREACH data IN GetCreator().textArray THEN
+//         data = GetCreator().textArray[i];
 //         WHILE (data.alpha < 1) or (data.x < data.targetX) THEN
 //             data.x = lerp(data.x, data.targetX, 0.2);
 //             data.alpha = min(data.alpha + 0.04, 1.0);

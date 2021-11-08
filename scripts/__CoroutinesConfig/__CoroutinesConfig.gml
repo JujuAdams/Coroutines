@@ -6,7 +6,20 @@
 //   2) Turn off this macro
 #macro COROUTINES_CHECK_SYNTAX  true
 
+// Controls the default cancellation behaviour for coroutines when their creator is
+// destroyed or garbage collected. Whether or not a specific coroutines is cancelled
+// when orphaned can also be controlled using the .CancelWhenOrphaned() method.
+#macro COROUTINES_DEFAULT_CANCEL_WHEN_ORPHANED  false
 
+// This macro is related to the one above. If you're creating a coroutine in the scope
+// of a struct, the coroutine needs to keep a reference to that struct so that the
+// .GetCreator() method can return a value. This causes a problem if you're expecting
+// (or intending for) that struct to be garbage collected at some point because the
+// coroutine will keep the struct alive if the coroutine holds a strong reference.
+// Setting this macro to <true> will default every struct reference to a weak reference
+// to avoid this problem. The type of reference that an individual coroutine holds can
+// be further adjusted using the .WeakReference() method.
+#macro COROUTINES_DEFAULT_CREATOR_WEAK_REFERENCE  false
 
 
 
