@@ -27,7 +27,7 @@ function __CoroutineForEachClass() constructor
     __index = 0;
     __complete = false;
     
-    __dataType    = undefined; //0 = array, 1 = struct, 2 = coroutine
+    __dataType    = undefined; //0 = array, 1 = struct, 2 = coroutine, 3 = instance/object
     __repeatData  = undefined;
     __repeatNames = undefined; //Only used for structs
     __repeatCount = 0;
@@ -83,11 +83,53 @@ function __CoroutineForEachClass() constructor
                     __repeatCount = infinity; //We use different logic for coroutine iterators based on the .Get() method
                     __dataType = 2; //Coroutine
                 }
+                else if (instance_exists(__repeatData))
+                {
+                    //Plot twist, it's an instance!
+                    __repeatCount = 1;
+                    __repeatData  = [__repeatData];
+                    __dataType    = 3; //Instance/Object
+                }
                 else
                 {
                     __repeatCount = variable_struct_names_count(__repeatData);
                     __repeatNames = variable_struct_get_names(__repeatData);
                     __dataType = 1; //Struct
+                }
+            }
+            else if (is_numeric(__repeatData))
+            {
+                if ((floor(__repeatData) != __repeatData) || (__repeatData < 0))
+                {
+                    __CoroutineError("Cannot iterate over number \"", __repeatData, "\"\nObject indexes/instance IDs must be integers greater than or equal to zero");
+                }
+                
+                __dataType = 3; //Instance/Object
+                
+                if (__repeatData >= 100000)
+                {
+                    //Data is an instance ID
+                    __repeatData = instance_exists(__repeatData)? [__repeatData] : [];
+                }
+                else if (object_exists(__repeatData))
+                {
+                    var _object = __repeatData;
+                    
+                    __repeatCount = instance_number(_object);
+                    __repeatData  = array_create(__repeatCount);
+                    
+                    //Fill our iterable array with instances of the given object
+                    var _repeatData = __repeatData;
+                    var _i = 0;
+                    with(_object)
+                    {
+                        _repeatData[@ _i] = self;
+                        ++_i;
+                    }
+                }
+                else
+                {
+                    __CoroutineError("Cannot iterate over object index ", __repeatData, " as it does not exist");
                 }
             }
             else
@@ -106,6 +148,7 @@ function __CoroutineForEachClass() constructor
             switch(__dataType)
             {
                 case 0: //Array
+                case 3: //Instance/Object
                     __setterFunction(__repeatData[0]);
                 break;
                 
@@ -166,6 +209,21 @@ function __CoroutineForEachClass() constructor
                             }
                             else
                             {
+                                __Loop();
+                            }
+                        break;
+                        
+                        case 3: //Instance/Object
+                            //Increase our repeats count, skipping instances that don't exist. If we've reached the end then call us complete!
+                            while((__repeatIndex < __repeatCount) && !instance_exists(__repeatData[__repeatIndex])) __repeatIndex++;
+                            
+                            if (__repeatIndex >= __repeatCount)
+                            {
+                                __Complete();
+                            }
+                            else
+                            {
+                                __setterFunction(__repeatData[__repeatIndex]);
                                 __Loop();
                             }
                         break;
