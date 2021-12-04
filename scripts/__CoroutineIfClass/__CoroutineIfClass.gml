@@ -104,11 +104,11 @@ function __CoroutineIfClass() constructor
             
             if (__index >= array_length(_functionArray)) __complete = true;
         }
-        until ((global.__coroutineEscapeState > 0) || global.__coroutineBreak || __complete);
+        until ((global.__coroutineEscapeState > 0) || global.__coroutineBreak || global.__coroutineContinue || __complete);
         
-        if (global.__coroutineBreak)
+        if (global.__coroutineBreak || global.__coroutineContinue)
         {
-            //N.B. We don't clear up the BREAK state because we want break to bleed through to the next loop
+            //N.B. We don't clear up the BREAK or CONTINUE state because we want break to bleed through to the next loop
             __complete = true;
         }
     }

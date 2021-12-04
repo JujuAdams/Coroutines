@@ -24,6 +24,7 @@
     {"id":{"name":"oTestCoroutineIterator","path":"objects/oTestCoroutineIterator/oTestCoroutineIterator.yy",},"order":1,},
     {"id":{"name":"oCoroutineManager","path":"objects/oCoroutineManager/oCoroutineManager.yy",},"order":2,},
     {"id":{"name":"__CoroutineAwaitAsyncClass","path":"scripts/__CoroutineAwaitAsyncClass/__CoroutineAwaitAsyncClass.yy",},"order":11,},
+    {"id":{"name":"__CoroutineContinueClass","path":"scripts/__CoroutineContinueClass/__CoroutineContinueClass.yy",},"order":12,},
     {"id":{"name":"__CoroutineForEachClass","path":"scripts/__CoroutineForEachClass/__CoroutineForEachClass.yy",},"order":5,},
     {"id":{"name":"oTestBreak","path":"objects/oTestBreak/oTestBreak.yy",},"order":5,},
     {"id":{"name":"oTestAsyncHTTP","path":"objects/oTestAsyncHTTP/oTestAsyncHTTP.yy",},"order":4,},

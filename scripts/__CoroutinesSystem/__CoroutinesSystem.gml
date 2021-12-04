@@ -34,6 +34,7 @@ global.__coroutineSyntaxCheckerPrevious = "CO_END";
 
 global.__coroutineEscapeState = __COROUTINE_ESCAPE_STATE.__NONE;
 global.__coroutineBreak = false;
+global.__coroutineContinue = false;
 global.__coroutineReturnValue = undefined;
 global.__coroutineApproxDuration = undefined;
 
@@ -108,7 +109,7 @@ function __CoroutineCheckSyntax(_me)
         case "THEN":
             switch(global.__coroutineSyntaxCheckerPrevious)
             {
-                case "CO_BEGIN": case "THEN": case "YIELD": case "PAUSE": case "RETURN": case "END": case "REPEAT": case "WHILE": case "IN": case "BREAK": case "IF": case "ELSE": case "ELSE_IF": case "END_IF": case "AWAIT_ASYNC_*": case "TIMEOUT": case "AWAIT": case "DELAY": break;
+                case "CO_BEGIN": case "THEN": case "YIELD": case "PAUSE": case "RETURN": case "END": case "REPEAT": case "WHILE": case "IN": case "BREAK": case "CONTINUE": case "IF": case "ELSE": case "ELSE_IF": case "END_IF": case "AWAIT_ASYNC_*": case "TIMEOUT": case "AWAIT": case "DELAY": break;
                 case "FOREACH": break; //FIXME - Get "IN" to be detectable
                 default: __CoroutineError("Syntax error\nFound ", global.__coroutineSyntaxCheckerPrevious, " before ", _me);
             }
@@ -127,8 +128,8 @@ function __CoroutineCheckSyntax(_me)
         case "RETURN":
             switch(global.__coroutineSyntaxCheckerPrevious)
             {
-                case "CO_BEGIN": case "THEN": case "END": case "BREAK": case "END_IF": break;
-                default: __CoroutineError("Syntax error\nExpected CO_BEGIN, THEN, END, BREAK, or END_IF before ", _me, ", but found ", global.__coroutineSyntaxCheckerPrevious);
+                case "CO_BEGIN": case "THEN": case "END": case "BREAK": case "CONTINUE": case "END_IF": break;
+                default: __CoroutineError("Syntax error\nExpected CO_BEGIN, THEN, END, BREAK, CONTINUE, or END_IF before ", _me, ", but found ", global.__coroutineSyntaxCheckerPrevious);
             }
         break;
         
@@ -137,16 +138,16 @@ function __CoroutineCheckSyntax(_me)
         case "ELSE_IF":
             switch(global.__coroutineSyntaxCheckerPrevious)
             {
-                case "THEN": case "END": case "BREAK": case "END_IF": break;
-                default: __CoroutineError("Syntax error\nExpected THEN, END, BREAK, or END_IF before ", _me, ", but found ", global.__coroutineSyntaxCheckerPrevious);
+                case "THEN": case "END": case "BREAK": case "CONTINUE": case "END_IF": break;
+                default: __CoroutineError("Syntax error\nExpected THEN, END, BREAK, CONTINUE, or END_IF before ", _me, ", but found ", global.__coroutineSyntaxCheckerPrevious);
             }
         break;
         
         case "END_IF":
             switch(global.__coroutineSyntaxCheckerPrevious)
             {
-                case "THEN": case "END": case "BREAK": case "ELSE": case "END_IF": break;
-                default: __CoroutineError("Syntax error\nExpected THEN, END, BREAK, ELSE, or END_IF before ", _me, ", but found ", global.__coroutineSyntaxCheckerPrevious);
+                case "THEN": case "END": case "BREAK": case "CONTINUE": case "ELSE": case "END_IF": break;
+                default: __CoroutineError("Syntax error\nExpected THEN, END, BREAK, CONTINUE, ELSE, or END_IF before ", _me, ", but found ", global.__coroutineSyntaxCheckerPrevious);
             }
         break;
         
@@ -159,7 +160,7 @@ function __CoroutineCheckSyntax(_me)
         case "DELAY":
             switch(global.__coroutineSyntaxCheckerPrevious)
             {
-                case "CO_BEGIN": case "THEN": case "END": case "BREAK": case "ELSE": case "END_IF": break;
+                case "CO_BEGIN": case "THEN": case "END": case "BREAK": case "CONTINUE": case "ELSE": case "END_IF": break;
                 default: __CoroutineError("Syntax error\nFound ", global.__coroutineSyntaxCheckerPrevious, " before ", _me);
             }
         break;
@@ -175,8 +176,8 @@ function __CoroutineCheckSyntax(_me)
         case "BREAK":
             switch(global.__coroutineSyntaxCheckerPrevious)
             {
-                case "THEN": case "END": case "BREAK": case "ELSE": case "END_IF": break;
-                default: __CoroutineError("Syntax error\nExpected THEN, END, BREAK, ELSE, or END_IF before ", _me, ", but found ", global.__coroutineSyntaxCheckerPrevious);
+                case "THEN": case "END": case "BREAK": case "CONTINUE": case "ELSE": case "END_IF": break;
+                default: __CoroutineError("Syntax error\nExpected THEN, END, BREAK, CONTINUE, ELSE, or END_IF before ", _me, ", but found ", global.__coroutineSyntaxCheckerPrevious);
             }
         break;
         
