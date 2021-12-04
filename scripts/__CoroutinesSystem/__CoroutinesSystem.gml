@@ -126,7 +126,7 @@ function __CoroutineCheckSyntax(_me)
         case "RETURN":
             switch(global.__coroutineSyntaxCheckerPrevious)
             {
-                case "CO_BEGIN": case "THEN": case "END": case "BREAK": case "CONTINUE": case "END_IF": break;
+                case "CO_BEGIN": case "THEN": case "END": case "BREAK": case "CONTINUE": case "ELSE": case "END_IF": break;
                 default: __CoroutineError("Syntax error\nExpected CO_BEGIN, THEN, END, BREAK, CONTINUE, or END_IF before ", _me, ", but found ", global.__coroutineSyntaxCheckerPrevious);
             }
         break;
