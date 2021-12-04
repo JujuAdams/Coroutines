@@ -172,6 +172,7 @@ function __CoroutineCheckSyntax(_me)
         break;
         
         case "BREAK":
+        case "CONTINUE":
             switch(global.__coroutineSyntaxCheckerPrevious)
             {
                 case "THEN": case "END": case "BREAK": case "CONTINUE": case "ELSE": case "END_IF": break;
