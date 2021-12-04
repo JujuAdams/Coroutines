@@ -27,7 +27,7 @@
     "path": "folders/Test Cases.yy",
   },
   "resourceVersion": "1.0",
-  "name": "oTestForEach",
+  "name": "oTestContinue",
   "tags": [],
   "resourceType": "GMObject",
 }

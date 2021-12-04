@@ -38,11 +38,13 @@
 #macro CO_BEGIN                __CoroutineGetNext();(function(){__CoroutineBegin(function(){ //__CoroutineGetNext() is required to work around GM compiler bug (https://github.com/JujuAdams/Coroutines/issues/7)
 #macro CO_ON_COMPLETE          });__CoroutineOnComplete(function(){
 #macro CO_END                  });return __CoroutineEnd();})();
+#macro CO_PARAMS               global.__coroutineNext
 #macro THEN                    });__CoroutineThen(function(){
 #macro YIELD                   });__CoroutineEscape(__COROUTINE_ESCAPE_STATE.__YIELD,function(){return 
 #macro PAUSE                   });__CoroutineEscape(__COROUTINE_ESCAPE_STATE.__PAUSE,function(){return 
 #macro RETURN                  });__CoroutineEscape(__COROUTINE_ESCAPE_STATE.__RETURN,function(){return 
 #macro BREAK                   });__CoroutineBreak(function(){ //N.B. This opens a blind function - it is never executed
+#macro CONTINUE                });__CoroutineContinue(function(){ //N.B. This opens a blind function - it is never executed
 #macro REPEAT                  });__CoroutineRepeat(function(){return 
 #macro WHILE                   });__CoroutineWhile(function(){return 
 #macro FOREACH                 });__CoroutineForEach(function(_value){
