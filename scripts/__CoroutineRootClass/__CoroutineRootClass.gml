@@ -62,7 +62,7 @@ function __CoroutineEnd()
         __CoroutineError("Creator scope neither a struct nor an instance\nCheck that this scope has not been deactivated somehow");
     }
     
-    global.__coroutineNext.__Execute();
+    global.__coroutineNext.__Execute(global.__coroutineManagerArray);
     
     var _result = global.__coroutineNext;
     global.__coroutineNext = __CoroutineInstantiate();
@@ -73,6 +73,7 @@ function __CoroutineRootClass() constructor
 {
     __functionArray = [];
     __onCompleteFunction = undefined;
+    __managerArray = undefined;
     
     __index = 0;
     __complete = false;
@@ -148,7 +149,7 @@ function __CoroutineRootClass() constructor
         __paused = false;
         __returnValue = undefined;
         
-        if (!__executing) array_push(global.__coroutineExecuting, self);
+        if (!__executing) array_push(__managerArray, self);
         
         var _i = 0;
         repeat(array_length(__functionArray))
@@ -276,18 +277,19 @@ function __CoroutineRootClass() constructor
         array_push(__functionArray, _new);
     }
     
-    static __Execute = function()
+    static __Execute = function(_managerArray)
     {
         if (!__executing)
         {
+            __managerArray = _managerArray
             __executing = true;
-            array_push(global.__coroutineExecuting, self);
+            array_push(__managerArray, self);
         }
     }
     
     static __RemoveFromAutomation = function()
     {
-        var _array = global.__coroutineExecuting;
+        var _array = __managerArray;
         var _i = 0;
         repeat(array_length(_array))
         {
