@@ -36,7 +36,6 @@ global.__coroutineEscapeState = __COROUTINE_ESCAPE_STATE.__NONE;
 global.__coroutineBreak = false;
 global.__coroutineContinue = false;
 global.__coroutineReturnValue = undefined;
-global.__coroutineApproxDuration = undefined;
 
 global.__coroutineStack = [];
 global.__coroutineLastTick = current_time;
@@ -54,7 +53,6 @@ global.__coroutineAwaitingAsync = { //TODO - Is this faster as a map or a struct
 
 
 
-#macro CO_PARAMS  global.__coroutineNext
 global.__coroutineNext = __CoroutineInstantiate();
 
 
