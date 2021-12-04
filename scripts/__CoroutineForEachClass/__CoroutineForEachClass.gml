@@ -83,13 +83,6 @@ function __CoroutineForEachClass() constructor
                     __repeatCount = infinity; //We use different logic for coroutine iterators based on the .Get() method
                     __dataType = 2; //Coroutine
                 }
-                else if (instance_exists(__repeatData))
-                {
-                    //Plot twist, it's an instance!
-                    __repeatCount = 1;
-                    __repeatData  = [__repeatData];
-                    __dataType    = 3; //Instance/Object
-                }
                 else
                 {
                     __repeatCount = variable_struct_names_count(__repeatData);
@@ -109,7 +102,16 @@ function __CoroutineForEachClass() constructor
                 if (__repeatData >= 100000)
                 {
                     //Data is an instance ID
-                    __repeatData = instance_exists(__repeatData)? [__repeatData] : [];
+                    if (instance_exists(__repeatData))
+                    {
+                        __repeatData  = [__repeatData];
+                        __repeatCount = 1;
+                    }
+                    else
+                    {
+                        __repeatData  = [];
+                        __repeatCount = 0;
+                    }
                 }
                 else if (object_exists(__repeatData))
                 {
@@ -130,6 +132,22 @@ function __CoroutineForEachClass() constructor
                 else
                 {
                     __CoroutineError("Cannot iterate over object index ", __repeatData, " as it does not exist");
+                }
+            }
+            else if (instanceof(__repeatData) == "instance")
+            {
+                //Plot twist, it's an instance!
+                __dataType = 3; //Instance/Object
+                
+                if (instance_exists(__repeatData))
+                {
+                    __repeatData  = [__repeatData];
+                    __repeatCount = 1;
+                }
+                else
+                {
+                    __repeatData  = [];
+                    __repeatCount = 0;
                 }
             }
             else
