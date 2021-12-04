@@ -1,4 +1,4 @@
-function __CoroutineBreak()
+function __CoroutineBreak(_blindFunction)
 {
     if (COROUTINES_CHECK_SYNTAX) __CoroutineCheckSyntax("BREAK");
     

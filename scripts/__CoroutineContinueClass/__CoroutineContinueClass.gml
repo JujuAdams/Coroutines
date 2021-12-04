@@ -1,4 +1,4 @@
-function __CoroutineContinue()
+function __CoroutineContinue(_blindFunction)
 {
     if (COROUTINES_CHECK_SYNTAX) __CoroutineCheckSyntax("CONTINUE");
     
