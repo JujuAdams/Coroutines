@@ -9,6 +9,7 @@
     {"id":{"name":"oTestWeakReferenceCancel","path":"objects/oTestWeakReferenceCancel/oTestWeakReferenceCancel.yy",},"order":9,},
     {"id":{"name":"oTestForEach","path":"objects/oTestForEach/oTestForEach.yy",},"order":7,},
     {"id":{"name":"TestPowersOfTwo","path":"scripts/TestPowersOfTwo/TestPowersOfTwo.yy",},"order":11,},
+    {"id":{"name":"oTestNestedCoroutines","path":"objects/oTestNestedCoroutines/oTestNestedCoroutines.yy",},"order":12,},
     {"id":{"name":"__CoroutineDelayClass","path":"scripts/__CoroutineDelayClass/__CoroutineDelayClass.yy",},"order":12,},
     {"id":{"name":"__CoroutineMisc","path":"scripts/__CoroutineMisc/__CoroutineMisc.yy",},"order":2,},
     {"id":{"name":"__CoroutineIfClass","path":"scripts/__CoroutineIfClass/__CoroutineIfClass.yy",},"order":9,},
@@ -74,7 +75,7 @@
   ],
   "IncludedFiles": [],
   "MetaData": {
-    "IDEVersion": "2.3.6.595",
+    "IDEVersion": "2.3.7.603",
   },
   "resourceVersion": "1.4",
   "name": "Coroutines",
