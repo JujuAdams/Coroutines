@@ -236,8 +236,9 @@ function __CoroutineRootClass() constructor
             
             if (__index >= array_length(__functionArray)) __complete = true;
             
-            //Clean up any hanging BREAK commands
-            global.__coroutineBreak = false;
+            //Clean up any hanging BREAK and CONTINUE commands
+            global.__coroutineBreak    = false;
+            global.__coroutineContinue = false;
         }
         until ((global.__coroutineEscapeState > 0) || __complete);
         
