@@ -223,8 +223,8 @@ function __CoroutineRootClass() constructor
         
         //Set up some global state variables that child classes will read
         global.__coroutineEscapeState = __COROUTINE_ESCAPE_STATE.__NONE;
-        global.__coroutineBreak = false;
-        global.__coroutineCoroutine = false;
+        global.__coroutineBreak       = false;
+        global.__coroutineContinue    = false;
         global.__coroutineReturnValue = undefined;
         
         //Always guarantee one iteration so we're updating loops and AWAIT commands etc.
