@@ -1,6 +1,6 @@
 <h1 align="center">Coroutines 0.3.0</h1>
 
-<p align="center">Asynchronous execution in GML for GameMaker Studio 2.3.6 by <b>@jujuadams</b></p>
+<p align="center">Asynchronous execution in GML for GameMaker Studio 2.3.6 and above by <b>@jujuadams</b></p>
 
 <p align="center"><a href="https://github.com/JujuAdams/Coroutines/releases/">Download the .yymps</a></p>
 <p align="center">Chat about Coroutines on the <a href="https://discord.gg/8krYCqr">Discord server</a></p>
