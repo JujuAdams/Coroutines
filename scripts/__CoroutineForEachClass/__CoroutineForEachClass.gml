@@ -132,8 +132,10 @@ function __CoroutineForEachClass() constructor
             __COROUTINE_TRY_EXECUTING_FUNCTION;
             
             //Move to the next function
-            if (__index >= array_length(__functionArray))
+            if (global.__coroutineContinue || (__index >= array_length(__functionArray)))
             {
+                global.__coroutineContinue = false;
+                
                 //Increase our repeats count. If we've reached the end then call us complete!
                 ++__repeatIndex;
                 if (__repeatIndex >= __repeatCount)
