@@ -40,8 +40,7 @@ global.__coroutineReturnValue = undefined;
 global.__coroutineStack = [];
 global.__coroutineLastTick = current_time;
 
-global.__coroutineExecuting = [];
-global.__coroutineManagerArray = global.__coroutineExecuting;
+global.__coroutineManagerArray = [];
 global.__coroutineAwaitingAsync = { //TODO - Is this faster as a map or a struct?
     networking: [],
     http      : [],

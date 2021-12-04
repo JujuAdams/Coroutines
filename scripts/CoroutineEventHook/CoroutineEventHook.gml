@@ -22,7 +22,7 @@ function CoroutineEventHook()
         {
             global.__coroutineLastTick = current_time;
             
-            var _array = global.__coroutineExecuting;
+            var _array = global.__coroutineManagerArray;
             var _i = 0;
             repeat(array_length(_array))
             {
