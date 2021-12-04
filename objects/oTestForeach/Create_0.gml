@@ -10,9 +10,9 @@ CO_BEGIN
         show_debug_message(value);
     END
     
-    //FOREACH value IN TestPowersOfTwo(10) THEN
-    //    show_debug_message(value);
-    //END
+    FOREACH value IN TestPowersOfTwo(10) THEN
+        show_debug_message(value);
+    END
     
     FOREACH value IN oTestForEachTestInstance THEN
         show_debug_message(value.id);
