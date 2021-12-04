@@ -1,4 +1,4 @@
-#macro __COROUTINES_VERSION  "0.4.0"
+#macro __COROUTINES_VERSION  "0.5.0"
 #macro __COROUTINES_DATE     "2021-12-04"
 
 show_debug_message("Welcome to Coroutines by @jujuadams! This is version " + __COROUTINES_VERSION + ", " + __COROUTINES_DATE);
@@ -40,7 +40,7 @@ global.__coroutineReturnValue = undefined;
 global.__coroutineStack = [];
 global.__coroutineLastTick = current_time;
 
-global.__coroutineExecuting = [];
+global.__coroutineManagerArray = [];
 global.__coroutineAwaitingAsync = { //TODO - Is this faster as a map or a struct?
     networking: [],
     http      : [],
@@ -126,12 +126,19 @@ function __CoroutineCheckSyntax(_me)
         case "RETURN":
             switch(global.__coroutineSyntaxCheckerPrevious)
             {
-                case "CO_BEGIN": case "THEN": case "END": case "BREAK": case "CONTINUE": case "END_IF": break;
+                case "CO_BEGIN": case "THEN": case "END": case "BREAK": case "CONTINUE": case "ELSE": case "END_IF": break;
                 default: __CoroutineError("Syntax error\nExpected CO_BEGIN, THEN, END, BREAK, CONTINUE, or END_IF before ", _me, ", but found ", global.__coroutineSyntaxCheckerPrevious);
             }
         break;
         
         case "END":
+            switch(global.__coroutineSyntaxCheckerPrevious)
+            {
+                case "THEN": case "END": case "BREAK": case "CONTINUE": case "END_IF": case "RACE": case "SYNC": break;
+                default: __CoroutineError("Syntax error\nExpected THEN, END, BREAK, CONTINUE, END_IF, RACE, or SYNC before ", _me, ", but found ", global.__coroutineSyntaxCheckerPrevious);
+            }
+        break;
+        
         case "ELSE":
         case "ELSE_IF":
             switch(global.__coroutineSyntaxCheckerPrevious)
@@ -156,6 +163,8 @@ function __CoroutineCheckSyntax(_me)
         case "AWAIT_ASYNC_*":
         case "AWAIT":
         case "DELAY":
+        case "RACE":
+        case "SYNC":
             switch(global.__coroutineSyntaxCheckerPrevious)
             {
                 case "CO_BEGIN": case "THEN": case "END": case "BREAK": case "CONTINUE": case "ELSE": case "END_IF": break;

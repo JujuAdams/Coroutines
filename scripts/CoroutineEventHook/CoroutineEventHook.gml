@@ -22,21 +22,28 @@ function CoroutineEventHook()
         {
             global.__coroutineLastTick = current_time;
             
-            var _array = global.__coroutineExecuting;
+            var _array = global.__coroutineManagerArray;
             var _i = 0;
             repeat(array_length(_array))
             {
                 var _coroutine = _array[_i];
-                _coroutine.__Run();
-                
-                if (_coroutine.__complete)
+                if (!_coroutine.__executing)
                 {
                     array_delete(_array, _i, 1);
-                    _coroutine.__executing = false;
                 }
                 else
                 {
-                    ++_i;
+                    _coroutine.__Run();
+                    
+                    if (_coroutine.__complete)
+                    {
+                        array_delete(_array, _i, 1);
+                        _coroutine.__executing = false;
+                    }
+                    else
+                    {
+                        ++_i;
+                    }
                 }
             }
         }

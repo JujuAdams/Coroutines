@@ -35,9 +35,9 @@
 // You're welcome to change these macros to whatever you want to get this library to fit
 // into your game. There will be no impact on functionality (though the syntax checker
 // will use the default macro names).
-#macro CO_BEGIN                __CoroutineGetNext();(function(){__CoroutineBegin(function(){ //__CoroutineGetNext() is required to work around GM compiler bug (https://github.com/JujuAdams/Coroutines/issues/7)
+#macro CO_BEGIN                ((function(){__CoroutineBegin(function(){ //__CoroutineGetNext() is required to work around GM compiler bug (https://github.com/JujuAdams/Coroutines/issues/7)
 #macro CO_ON_COMPLETE          });__CoroutineOnComplete(function(){
-#macro CO_END                  });return __CoroutineEnd();})();
+#macro CO_END                  });return __CoroutineEnd();})());
 #macro CO_PARAMS               global.__coroutineNext
 #macro THEN                    });__CoroutineThen(function(){
 #macro YIELD                   });__CoroutineEscape(__COROUTINE_ESCAPE_STATE.__YIELD,function(){return 
@@ -56,6 +56,8 @@
 #macro END_IF                  });__CoroutineEndIf(function(){
 #macro AWAIT                   });__CoroutineAwait(function(){return 
 #macro DELAY                   });__CoroutineDelay(function(){return 
+#macro RACE                    });__CoroutineRace(function(){
+#macro SYNC                    });__CoroutineSync(function(){
 #macro AWAIT_ASYNC_HTTP        });__CoroutineAwaitAsync("http",function(){
 #macro AWAIT_ASYNC_NETWORKING  });__CoroutineAwaitAsync("networking",function(){
 #macro AWAIT_ASYNC_SOCIAL      });__CoroutineAwaitAsync("social",function(){
