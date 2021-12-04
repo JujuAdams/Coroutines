@@ -17,9 +17,9 @@ CO_BEGIN
     CO_END
     
     AWAIT a.GetComplete() || b.GetComplete() || c.GetComplete() THEN
-    //a.Cancel();
-    //b.Cancel();
-    //c.Cancel();
+    a.Cancel();
+    b.Cancel();
+    c.Cancel();
     
     show_debug_message("...AWAIT finished");
 CO_END

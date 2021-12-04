@@ -44,16 +44,23 @@ function __CoroutineSyncClass() constructor
             repeat(array_length(__coroutineArray))
             {
                 var _coroutine = __coroutineArray[_i];
-                _coroutine.__Run();
-                
-                if (_coroutine.GetComplete())
+                if (!_coroutine.__executing)
                 {
                     array_delete(__coroutineArray, _i, 1);
-                    _coroutine.__executing = false;
                 }
                 else
                 {
-                    ++_i;
+                    _coroutine.__Run();
+                    
+                    if (_coroutine.__complete)
+                    {
+                        array_delete(__coroutineArray, _i, 1);
+                        _coroutine.__executing = false;
+                    }
+                    else
+                    {
+                        ++_i;
+                    }
                 }
             }
             

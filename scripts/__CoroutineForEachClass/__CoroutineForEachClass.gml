@@ -77,9 +77,6 @@ function __CoroutineForEachClass() constructor
             {
                 if (instanceof(__repeatData) == "__CoroutineRootClass")
                 {
-                    //Ensure that this function is only processed when this FOREACH loop is processed
-                    __repeatData.__RemoveFromAutomation();
-                    
                     __repeatCount = infinity; //We use different logic for coroutine iterators based on the .Get() method
                     __dataType = 2; //Coroutine
                 }

@@ -27,16 +27,23 @@ function CoroutineEventHook()
             repeat(array_length(_array))
             {
                 var _coroutine = _array[_i];
-                _coroutine.__Run();
-                
-                if (_coroutine.__complete)
+                if (!_coroutine.__executing)
                 {
                     array_delete(_array, _i, 1);
-                    _coroutine.__executing = false;
                 }
                 else
                 {
-                    ++_i;
+                    _coroutine.__Run();
+                    
+                    if (_coroutine.__complete)
+                    {
+                        array_delete(_array, _i, 1);
+                        _coroutine.__executing = false;
+                    }
+                    else
+                    {
+                        ++_i;
+                    }
                 }
             }
         }

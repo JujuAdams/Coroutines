@@ -137,8 +137,6 @@ function __CoroutineRootClass() constructor
         
         __complete = true;
         __executing = false;
-        
-        __RemoveFromAutomation();
     }
     
     static Restart = function()
@@ -149,7 +147,7 @@ function __CoroutineRootClass() constructor
         __paused = false;
         __returnValue = undefined;
         
-        if (!__executing) array_push(__managerArray, self);
+        if (!__executing && is_array(__managerArray)) array_push(__managerArray, self);
         
         var _i = 0;
         repeat(array_length(__functionArray))
@@ -281,25 +279,13 @@ function __CoroutineRootClass() constructor
     {
         if (!__executing)
         {
-            __managerArray = _managerArray
             __executing = true;
-            array_push(__managerArray, self);
-        }
-    }
-    
-    static __RemoveFromAutomation = function()
-    {
-        var _array = __managerArray;
-        var _i = 0;
-        repeat(array_length(_array))
-        {
-            if (_array[_i] == self)
-            {
-                array_delete(_array, _i, 1);
-                return undefined;
-            }
             
-            ++_i;
+            if (is_array(_managerArray))
+            {
+                __managerArray = _managerArray
+                array_push(__managerArray, self);
+            }
         }
     }
 }
