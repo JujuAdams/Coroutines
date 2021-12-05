@@ -11,6 +11,7 @@
     {"id":{"name":"oTestForEach","path":"objects/oTestForEach/oTestForEach.yy",},"order":7,},
     {"id":{"name":"TestPowersOfTwo","path":"scripts/TestPowersOfTwo/TestPowersOfTwo.yy",},"order":11,},
     {"id":{"name":"oTestNestedCoroutines","path":"objects/oTestNestedCoroutines/oTestNestedCoroutines.yy",},"order":12,},
+    {"id":{"name":"oTestDelay","path":"objects/oTestDelay/oTestDelay.yy",},"order":15,},
     {"id":{"name":"__CoroutineDelayClass","path":"scripts/__CoroutineDelayClass/__CoroutineDelayClass.yy",},"order":11,},
     {"id":{"name":"__CoroutineMisc","path":"scripts/__CoroutineMisc/__CoroutineMisc.yy",},"order":2,},
     {"id":{"name":"__CoroutineIfClass","path":"scripts/__CoroutineIfClass/__CoroutineIfClass.yy",},"order":8,},
