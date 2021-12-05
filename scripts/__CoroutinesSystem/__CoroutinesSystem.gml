@@ -107,7 +107,7 @@ function __CoroutineCheckSyntax(_me)
         case "THEN":
             switch(global.__coroutineSyntaxCheckerPrevious)
             {
-                case "CO_BEGIN": case "THEN": case "YIELD": case "PAUSE": case "RETURN": case "END": case "REPEAT": case "WHILE": case "IN": case "BREAK": case "CONTINUE": case "IF": case "ELSE": case "ELSE_IF": case "END_IF": case "AWAIT_ASYNC_*": case "TIMEOUT": case "AWAIT": case "DELAY": break;
+                case "CO_BEGIN": case "THEN": case "YIELD": case "PAUSE": case "RETURN": case "END": case "REPEAT": case "WHILE": case "IN": case "BREAK": case "CONTINUE": case "IF": case "ELSE": case "ELSE_IF": case "END_IF": case "AWAIT_ASYNC_*": case "ASYNC_TIMEOUT": case "AWAIT": case "DELAY": break;
                 case "FOREACH": break; //FIXME - Get "IN" to be detectable
                 default: __CoroutineError("Syntax error\nFound ", global.__coroutineSyntaxCheckerPrevious, " before ", _me);
             }
@@ -189,7 +189,7 @@ function __CoroutineCheckSyntax(_me)
             }
         break;
         
-        case "TIMEOUT":
+        case "ASYNC_TIMEOUT":
             switch(global.__coroutineSyntaxCheckerPrevious)
             {
                 case "AWAIT_ASYNC_*": break;

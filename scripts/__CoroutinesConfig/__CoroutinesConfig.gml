@@ -69,5 +69,5 @@
 #macro AWAIT_ASYNC_DIALOG      });__CoroutineAwaitAsync("dialog",function(){
 #macro AWAIT_ASYNC_SYSTEM      });__CoroutineAwaitAsync("system",function(){
 #macro AWAIT_ASYNC_STEAM       });__CoroutineAwaitAsync("steam",function(){
-#macro TIMEOUT                 });__CoroutineAsyncTimeout(function(){return 
+#macro ASYNC_TIMEOUT           });__CoroutineAsyncTimeout(function(){return 
 #macro ASYNC_COMPLETE          return true;

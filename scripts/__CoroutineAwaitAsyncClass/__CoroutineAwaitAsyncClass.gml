@@ -11,7 +11,7 @@ function __CoroutineAwaitAsync(_type, _function)
 
 function __CoroutineAsyncTimeout(_function)
 {
-    if (COROUTINES_CHECK_SYNTAX) __CoroutineCheckSyntax("TIMEOUT");
+    if (COROUTINES_CHECK_SYNTAX) __CoroutineCheckSyntax("ASYNC_TIMEOUT");
     
     //Set the timeout function for the previous command on the stack
     //This is hopefully an AWAIT_ASYNC_* command!

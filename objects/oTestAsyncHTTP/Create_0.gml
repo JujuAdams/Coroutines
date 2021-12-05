@@ -26,7 +26,7 @@ CO_BEGIN
                 //Request pending
             }
         }
-    TIMEOUT 3000 THEN
+    ASYNC_TIMEOUT 3000 THEN
     
     show_debug_message("data = \"" + data + "\"");
     show_debug_message("HTTP GET for \"" + url + "\" complete");

@@ -38,7 +38,7 @@ function ExampleFetchURL(_url)
                     ASYNC_COMPLETE;
                 }
             }
-        TIMEOUT 3000 THEN //Set our timeout to 3 seconds
+        ASYNC_TIMEOUT 3000 THEN //Set our timeout to 3 seconds
         
         //The coroutine is done now so output the data we received
         show_debug_message("data = \"" + data + "\"");
