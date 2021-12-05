@@ -25,7 +25,7 @@ function __CoroutineEnd()
     {
         var _string  = "Command stack is still open. Some common syntax errors to check for are:\n"
             _string += "- Every REPEAT, WHILE, and FOREACH command must have a matching END command\n"
-            _string += "- Every AWAIT_FIRST and SYNC command must have a matching END command\n"
+            _string += "- Every AWAIT_FIRST and AWAIT_ALL command must have a matching END command\n"
             _string += "- Every IF command must have a matching END_IF command\n"
             _string += "- \"ELSE IF\" (with a space) is invalid, use \"ELSE_IF\" instead";
         __CoroutineError(_string);

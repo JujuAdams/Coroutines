@@ -22,9 +22,9 @@ CO_BEGIN
 CO_END
 
 CO_BEGIN
-    show_debug_message("testing SYNC...");
+    show_debug_message("testing AWAIT_ALL...");
     
-    SYNC
+    AWAIT_ALL
         CO_BEGIN
             DELAY 200 THEN
             show_debug_message("1 finished");
@@ -41,5 +41,5 @@ CO_BEGIN
         CO_END
     END
     
-    show_debug_message("...SYNC finished");
+    show_debug_message("...AWAIT_ALL finished");
 CO_END

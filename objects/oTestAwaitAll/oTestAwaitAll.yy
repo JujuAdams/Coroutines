@@ -27,7 +27,7 @@
     "path": "folders/Test Cases.yy",
   },
   "resourceVersion": "1.0",
-  "name": "oTestSync",
+  "name": "oTestAwaitAll",
   "tags": [],
   "resourceType": "GMObject",
 }

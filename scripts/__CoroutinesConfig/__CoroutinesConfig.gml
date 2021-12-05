@@ -61,7 +61,7 @@
 #macro AWAIT                   });__CoroutineAwait(function(){return 
 #macro DELAY                   });__CoroutineDelay(function(){return 
 #macro AWAIT_FIRST             });__CoroutineAwaitFirst(function(){
-#macro SYNC                    });__CoroutineSync(function(){
+#macro AWAIT_ALL               });__CoroutineAwaitAll(function(){
 #macro AWAIT_ASYNC_HTTP        });__CoroutineAwaitAsync("http",function(){
 #macro AWAIT_ASYNC_NETWORKING  });__CoroutineAwaitAsync("networking",function(){
 #macro AWAIT_ASYNC_SOCIAL      });__CoroutineAwaitAsync("social",function(){
