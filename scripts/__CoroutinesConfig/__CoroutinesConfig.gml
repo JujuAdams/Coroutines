@@ -10,6 +10,10 @@
 // CPU time.
 #macro COROUTINES_CHECK_SYNTAX  true
 
+// Set this macro to <true> to measure DELAY command durations in milliseconds. If you
+// need per-frame accuracy then set this this macro to <false>
+#macro COROUTINES_DELAY_REALTIME  true
+
 // Controls the default cancellation behaviour for coroutines when their creator is
 // destroyed or garbage collected. Whether or not a specific coroutines is cancelled
 // when orphaned can also be controlled using the .CancelWhenOrphaned() method.

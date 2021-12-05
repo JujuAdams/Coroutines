@@ -12,26 +12,51 @@ function __CoroutineDelayClass() constructor
 {
     __delayFunction = undefined;
     
-    __complete = false;
+    __complete  = false;
     __startTime = undefined;
+    __frames    = undefined;
     
     static Restart = function()
     {
-        __complete = false;
+        __complete  = false;
         __startTime = undefined;
+        __frames    = undefined;
     }
     
     static __Run = function()
     {
-        if (__startTime == undefined) __startTime = current_time;
-        
-        if (current_time - __startTime > __delayFunction())
+        if (COROUTINES_DELAY_REALTIME)
         {
-            __complete = true;
+            if (__startTime == undefined) __startTime = current_time;
+            
+            if (current_time - __startTime > __delayFunction())
+            {
+                __complete = true;
+            }
+            else
+            {
+                global.__coroutineEscapeState = __COROUTINE_ESCAPE_STATE.__YIELD;
+            }
         }
         else
         {
-            global.__coroutineEscapeState = __COROUTINE_ESCAPE_STATE.__YIELD;
+            if (__frames == undefined)
+            {
+                __frames = 0;
+            }
+            else
+            {
+                __frames++;
+            }
+            
+            if (__frames > __delayFunction())
+            {
+                __complete = true;
+            }
+            else
+            {
+                global.__coroutineEscapeState = __COROUTINE_ESCAPE_STATE.__YIELD;
+            }
         }
     }
 }
