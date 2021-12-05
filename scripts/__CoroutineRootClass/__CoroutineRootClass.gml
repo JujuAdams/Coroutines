@@ -11,11 +11,6 @@ function __CoroutineInstantiate()
     return _new;
 }
 
-function __CoroutineGetNext()
-{
-    return global.__coroutineNext;
-}
-
 function __CoroutineBegin(_function)
 {
     if (COROUTINES_CHECK_SYNTAX) __CoroutineCheckSyntax("CO_BEGIN");
