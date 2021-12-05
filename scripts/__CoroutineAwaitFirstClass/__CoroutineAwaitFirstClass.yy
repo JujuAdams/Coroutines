@@ -6,7 +6,7 @@
     "path": "folders/Coroutines/(System)/Tapping your head + rubbing your tummy is two coroutines.yy",
   },
   "resourceVersion": "1.0",
-  "name": "__CoroutineRaceClass",
+  "name": "__CoroutineAwaitFirstClass",
   "tags": [],
   "resourceType": "GMScript",
 }

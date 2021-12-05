@@ -1,15 +1,15 @@
-function __CoroutineRace(_function)
+function __CoroutineAwaitFirst(_function)
 {
-    if (COROUTINES_CHECK_SYNTAX) __CoroutineCheckSyntax("RACE");
+    if (COROUTINES_CHECK_SYNTAX) __CoroutineCheckSyntax("AWAIT_FIRST");
     
-    var _new = new __CoroutineRaceClass();
+    var _new = new __CoroutineAwaitFirstClass();
     _new.__function = method(global.__coroutineStack[0], _function);
     
     __COROUTINE_PUSH_TO_PARENT;
     __COROUTINE_PUSH_TO_STACK;
 }
 
-function __CoroutineRaceClass() constructor
+function __CoroutineAwaitFirstClass() constructor
 {
     __function = undefined;
     
