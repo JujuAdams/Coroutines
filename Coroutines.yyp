@@ -26,6 +26,7 @@
     {"id":{"name":"__CoroutineAwaitAllClass","path":"scripts/__CoroutineAwaitAllClass/__CoroutineAwaitAllClass.yy",},"order":14,},
     {"id":{"name":"__CoroutineBreakClass","path":"scripts/__CoroutineBreakClass/__CoroutineBreakClass.yy",},"order":6,},
     {"id":{"name":"IsCoroutine","path":"scripts/IsCoroutine/IsCoroutine.yy",},"order":1,},
+    {"id":{"name":"oTestScope","path":"objects/oTestScope/oTestScope.yy",},"order":16,},
     {"id":{"name":"CoroutineEventHook","path":"scripts/CoroutineEventHook/CoroutineEventHook.yy",},"order":0,},
     {"id":{"name":"oTestCoroutineIterator","path":"objects/oTestCoroutineIterator/oTestCoroutineIterator.yy",},"order":1,},
     {"id":{"name":"oCoroutineManager","path":"objects/oCoroutineManager/oCoroutineManager.yy",},"order":2,},
@@ -80,7 +81,7 @@
   ],
   "IncludedFiles": [],
   "MetaData": {
-    "IDEVersion": "2.3.7.603",
+    "IDEVersion": "2.3.7.606",
   },
   "resourceVersion": "1.4",
   "name": "Coroutines",
