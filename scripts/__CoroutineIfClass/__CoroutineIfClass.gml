@@ -5,7 +5,7 @@ function __CoroutineIf(_conditionFunction)
     //TODO - Check for "ELSE IF" rather than the correct "ELSE_IF"
     
     var _new = new __CoroutineIfClass();
-    with(_new) __branchConditionArray[__branchWriteIndex] = method(global.__coroutineStack[0], _conditionFunction);
+    with(_new) __branchConditionArray[__branchWriteIndex] = method(global.__coroutineScope, _conditionFunction);
     
     __COROUTINE_PUSH_TO_PARENT;
     __COROUTINE_PUSH_TO_STACK;
@@ -15,7 +15,7 @@ function __CoroutineElseIf(_conditionFunction)
 {
     if (COROUTINES_CHECK_SYNTAX) __CoroutineCheckSyntax("ELSE_IF");
     
-    global.__coroutineStack[array_length(global.__coroutineStack)-1].__AddBranch(method(global.__coroutineStack[0], _conditionFunction));
+    global.__coroutineStack[array_length(global.__coroutineStack)-1].__AddBranch(method(global.__coroutineScope, _conditionFunction));
 }
 
 function __CoroutineElse(_function)
@@ -25,7 +25,7 @@ function __CoroutineElse(_function)
     global.__coroutineStack[array_length(global.__coroutineStack)-1].__AddBranch(undefined);
     
     //Push the follower function into the struct at the top of the stack
-    global.__coroutineStack[array_length(global.__coroutineStack)-1].__Add(method(global.__coroutineStack[0], _function));
+    global.__coroutineStack[array_length(global.__coroutineStack)-1].__Add(method(global.__coroutineScope, _function));
 }
 
 function __CoroutineEndIf(_function)
@@ -35,7 +35,7 @@ function __CoroutineEndIf(_function)
     array_pop(global.__coroutineStack);
     
     //Push the follower function into the struct at the top of the stack
-    global.__coroutineStack[array_length(global.__coroutineStack)-1].__Add(method(global.__coroutineStack[0], _function));
+    global.__coroutineStack[array_length(global.__coroutineStack)-1].__Add(method(global.__coroutineScope, _function));
 }
 
 function __CoroutineIfClass() constructor

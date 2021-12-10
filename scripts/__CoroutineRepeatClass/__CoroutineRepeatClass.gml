@@ -3,7 +3,7 @@ function __CoroutineRepeat(_countFunction)
     if (COROUTINES_CHECK_SYNTAX) __CoroutineCheckSyntax("REPEAT");
     
     var _new = new __CoroutineRepeatClass();
-    _new.__repeatsFunction = method(global.__coroutineStack[0], _countFunction);
+    _new.__repeatsFunction = method(global.__coroutineScope, _countFunction);
     
     __COROUTINE_PUSH_TO_PARENT;
     __COROUTINE_PUSH_TO_STACK;

@@ -3,7 +3,7 @@ function __CoroutineDelay(_delayFunction)
     if (COROUTINES_CHECK_SYNTAX) __CoroutineCheckSyntax("DELAY");
     
     var _new = new __CoroutineDelayClass();
-    _new.__delayFunction = method(global.__coroutineStack[0], _delayFunction);
+    _new.__delayFunction = method(global.__coroutineScope, _delayFunction);
     
     __COROUTINE_PUSH_TO_PARENT;
 }

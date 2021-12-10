@@ -4,7 +4,7 @@ function __CoroutineAwaitAsync(_type, _function)
     
     var _new = new __CoroutineAwaitAsyncClass();
     _new.__type = _type;
-    _new.__function = method(global.__coroutineStack[0], _function);
+    _new.__function = method(global.__coroutineScope, _function);
     _new.__coroutineRoot = global.__coroutineStack[0];
     
     __COROUTINE_PUSH_TO_PARENT;
@@ -16,7 +16,7 @@ function __CoroutineAsyncTimeout(_function)
     
     //Set the timeout function for the previous command on the stack
     //This is hopefully an AWAIT_ASYNC_* command!
-    global.__coroutineStack[array_length(global.__coroutineStack)-1].__timeoutFunction = method(global.__coroutineStack[0], _function);
+    global.__coroutineStack[array_length(global.__coroutineStack)-1].__timeoutFunction = method(global.__coroutineScope, _function);
 }
 
 function __CoroutineAwaitAsyncClass() constructor

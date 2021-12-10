@@ -54,6 +54,7 @@ global.__coroutineAwaitingAsync = { //TODO - Is this faster as a map or a struct
 
 
 global.__coroutineNext = __CoroutineInstantiate();
+global.__coroutineScope = global.__coroutineNext;
 
 
 

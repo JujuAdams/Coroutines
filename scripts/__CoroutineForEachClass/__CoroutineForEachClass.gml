@@ -3,7 +3,7 @@ function __CoroutineForEach(_setterFunction)
     if (COROUTINES_CHECK_SYNTAX) __CoroutineCheckSyntax("FOREACH");
     
     var _new = new __CoroutineForEachClass();
-    _new.__setterFunction = method(global.__coroutineStack[0], _setterFunction);
+    _new.__setterFunction = method(global.__coroutineScope, _setterFunction);
     
     __COROUTINE_PUSH_TO_PARENT;
     __COROUTINE_PUSH_TO_STACK;
@@ -15,7 +15,7 @@ function __CoroutineForEachIn(_function)
     
     //Set the data function for the previous command on the stack
     //This is hopefully a FOREACH command!
-    global.__coroutineStack[array_length(global.__coroutineStack)-1].__dataFunction = method(global.__coroutineStack[0], _function);
+    global.__coroutineStack[array_length(global.__coroutineStack)-1].__dataFunction = method(global.__coroutineScope, _function);
 }
 
 function __CoroutineForEachClass() constructor

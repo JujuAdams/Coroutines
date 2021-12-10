@@ -3,7 +3,7 @@ function __CoroutineWhile(_conditionFunction)
     if (COROUTINES_CHECK_SYNTAX) __CoroutineCheckSyntax("WHILE");
     
     var _new = new __CoroutineWhileClass();
-    _new.__whileFunction = method(global.__coroutineStack[0], _conditionFunction);
+    _new.__whileFunction = method(global.__coroutineScope, _conditionFunction);
     
     __COROUTINE_PUSH_TO_PARENT;
     __COROUTINE_PUSH_TO_STACK;

@@ -12,7 +12,7 @@ function __CoroutineEscape(_escapeState, _function)
     
     var _new = new __CoroutineEscapeClass();
     _new.__escapeState = _escapeState;
-    _new.__function = method(global.__coroutineStack[0], _function);
+    _new.__function = method(global.__coroutineScope, _function);
     
     __COROUTINE_PUSH_TO_PARENT;
 }

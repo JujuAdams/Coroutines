@@ -16,7 +16,7 @@ function __CoroutineBegin(_function)
     if (COROUTINES_CHECK_SYNTAX) __CoroutineCheckSyntax("CO_BEGIN");
     
     //Push this function into the struct at the top of the stack
-    global.__coroutineStack[array_length(global.__coroutineStack)-1].__Add(method(global.__coroutineStack[0], _function));
+    global.__coroutineStack[array_length(global.__coroutineStack)-1].__Add(method(global.__coroutineScope, _function));
 }
 
 function __CoroutineEnd()
@@ -62,6 +62,7 @@ function __CoroutineEnd()
     
     var _result = global.__coroutineNext;
     global.__coroutineNext = __CoroutineInstantiate();
+    global.__coroutineScope = global.__coroutineNext;
     return _result;
 }
 

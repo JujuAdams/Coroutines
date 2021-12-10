@@ -3,7 +3,7 @@ function __CoroutineAwaitAll(_function)
     if (COROUTINES_CHECK_SYNTAX) __CoroutineCheckSyntax("AWAIT_ALL");
     
     var _new = new __CoroutineAwaitAllClass();
-    _new.__function = method(global.__coroutineStack[0], _function);
+    _new.__function = method(global.__coroutineScope, _function);
     
     __COROUTINE_PUSH_TO_PARENT;
     __COROUTINE_PUSH_TO_STACK;
