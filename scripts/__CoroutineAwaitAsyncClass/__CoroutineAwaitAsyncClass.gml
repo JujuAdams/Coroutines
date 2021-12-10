@@ -5,6 +5,7 @@ function __CoroutineAwaitAsync(_type, _function)
     var _new = new __CoroutineAwaitAsyncClass();
     _new.__type = _type;
     _new.__function = method(global.__coroutineStack[0], _function);
+    _new.__coroutineRoot = global.__coroutineStack[0];
     
     __COROUTINE_PUSH_TO_PARENT;
 }
@@ -23,6 +24,7 @@ function __CoroutineAwaitAsyncClass() constructor
     __function = undefined;
     __type = undefined;
     __timeoutFunction = undefined;
+    __coroutineRoot = undefined;
     
     __complete = false;
     __startTime = undefined;

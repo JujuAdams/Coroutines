@@ -73,8 +73,14 @@ function CoroutineEventHook()
             var _i = 0;
             repeat(array_length(_array))
             {
-                var _coroutine = _array[_i];
-                if (_coroutine.__Callback())
+                var _coroutineCommand = _array[_i];
+                
+                var _coroutine = method_get_self(_coroutineCommand.__coroutineRoot);
+                if (!_coroutine.__executing)
+                {
+                    array_delete(_array, _i, 1);
+                }
+                else if (_coroutineCommand.__Callback())
                 {
                     array_delete(_array, _i, 1);
                     _coroutine.__Run();
