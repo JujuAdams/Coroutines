@@ -1,4 +1,4 @@
-<h1 align="center">Coroutines 1.0.0</h1>
+<h1 align="center">Coroutines 1.1.0</h1>
 
 <p align="center">Asynchronous execution in GML for GameMaker Studio 2.3.6 and above by <b>@jujuadams</b></p>
 
