@@ -73,9 +73,11 @@ function CoroutineEventHook()
             var _i = 0;
             repeat(array_length(_array))
             {
-                if (_array[_i].__Callback())
+                var _coroutine = _array[_i];
+                if (_coroutine.__Callback())
                 {
                     array_delete(_array, _i, 1);
+                    _coroutine.__Run();
                 }
                 else
                 {
