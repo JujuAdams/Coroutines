@@ -144,7 +144,11 @@ function __CoroutineRootClass() constructor
         __paused = false;
         __returnValue = undefined;
         
-        if (!__executing && is_array(__managerArray)) array_push(__managerArray, self);
+        if (!__executing && is_array(__managerArray))
+        {
+            __executing = true;
+            array_push(__managerArray, self);
+        }
         
         var _i = 0;
         repeat(array_length(__functionArray))
