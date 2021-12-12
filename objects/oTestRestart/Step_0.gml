@@ -1,0 +1,1 @@
+if (keyboard_check_pressed(ord("R"))) test.Restart();
