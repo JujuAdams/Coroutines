@@ -153,6 +153,12 @@ function __CoroutineRootClass() constructor
             __CoroutineError("Cannot call .Restart() for the coroutine that is currently being processed\nPlease use the RESTART command instead");
         }
         
+        //Call the CO_ON_COMPLETE function if one exists
+        if (!__complete)
+        {
+            if (is_method(__onCompleteFunction)) __onCompleteFunction();
+        }
+        
         __index = 0;
         __complete = false;
         
