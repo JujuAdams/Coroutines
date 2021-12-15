@@ -44,6 +44,7 @@
 #macro CO_END                  });return __CoroutineEnd();})());
 #macro CO_PARAMS               global.__coroutineNext
 #macro CO_SCOPE                global.__coroutineScope
+#macro CO_LOCAL                global.__coroutineRootStruct
 #macro THEN                    });__CoroutineThen(function(){
 #macro YIELD                   });__CoroutineEscape(__COROUTINE_ESCAPE_STATE.__YIELD,function(){return 
 #macro PAUSE                   });__CoroutineEscape(__COROUTINE_ESCAPE_STATE.__PAUSE,function(){return 

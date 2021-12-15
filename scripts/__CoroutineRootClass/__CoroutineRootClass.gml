@@ -117,6 +117,11 @@ function __CoroutineRootClass() constructor
     
     static Pause = function(_returnValue = undefined)
     {
+        if ((global.__coroutineEscapeState != __COROUTINE_ESCAPE_STATE.__PAUSE) && (global.__coroutineRootStruct == self))
+        {
+            __CoroutineError("Cannot call .Pause() for the coroutine that is currently being processed\nPlease use the PAUSE command instead");
+        }
+        
         if (!__paused)
         {
             __paused = true;
@@ -126,6 +131,11 @@ function __CoroutineRootClass() constructor
     
     static Cancel = function()
     {
+        if ((global.__coroutineEscapeState != __COROUTINE_ESCAPE_STATE.__RETURN) && (global.__coroutineRootStruct == self))
+        {
+            __CoroutineError("Cannot call .Cancel() for the coroutine that is currently being processed\nPlease use the RETURN command instead");
+        }
+        
         //Call the CO_ON_COMPLETE function if one exists
         if (!__complete)
         {
@@ -136,13 +146,18 @@ function __CoroutineRootClass() constructor
         __executing = false;
     }
     
-    static Restart = function(_returnValue = undefined)
+    static Restart = function()
     {
+        if ((global.__coroutineEscapeState != __COROUTINE_ESCAPE_STATE.__RESTART) && (global.__coroutineRootStruct == self))
+        {
+            __CoroutineError("Cannot call .Restart() for the coroutine that is currently being processed\nPlease use the RESTART command instead");
+        }
+        
         __index = 0;
         __complete = false;
         
         __paused = false;
-        __returnValue = _returnValue;
+        __returnValue = undefined;
         
         if (!__executing && is_array(__managerArray))
         {
@@ -227,6 +242,9 @@ function __CoroutineRootClass() constructor
         global.__coroutineContinue    = false;
         global.__coroutineReturnValue = undefined;
         
+        var _previousRootStruct = global.__coroutineRootStruct;
+        global.__coroutineRootStruct = self;
+        
         //Always guarantee one iteration so we're updating loops and AWAIT commands etc.
         do
         {
@@ -264,7 +282,7 @@ function __CoroutineRootClass() constructor
             break;
             
             case __COROUTINE_ESCAPE_STATE.__RESTART:
-                Restart(global.__coroutineReturnValue);
+                Restart();
             break;
         }
         
@@ -273,6 +291,9 @@ function __CoroutineRootClass() constructor
         {
             if (is_method(__onCompleteFunction)) __onCompleteFunction();
         }
+        
+        global.__coroutineRootStruct = _previousRootStruct;
+        global.__coroutineEscapeState = __COROUTINE_ESCAPE_STATE.__NONE;
     }
     
     static __Add = function(_new)
