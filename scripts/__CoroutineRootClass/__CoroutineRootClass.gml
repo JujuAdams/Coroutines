@@ -136,13 +136,13 @@ function __CoroutineRootClass() constructor
         __executing = false;
     }
     
-    static Restart = function()
+    static Restart = function(_returnValue = undefined)
     {
         __index = 0;
         __complete = false;
         
         __paused = false;
-        __returnValue = undefined;
+        __returnValue = _returnValue;
         
         if (!__executing && is_array(__managerArray))
         {
@@ -261,6 +261,10 @@ function __CoroutineRootClass() constructor
             case __COROUTINE_ESCAPE_STATE.__RETURN:
                 __complete = true;
                 __returnValue = global.__coroutineReturnValue;
+            break;
+            
+            case __COROUTINE_ESCAPE_STATE.__RESTART:
+                Restart(global.__coroutineReturnValue);
             break;
         }
         

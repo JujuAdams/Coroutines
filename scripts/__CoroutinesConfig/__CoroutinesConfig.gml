@@ -48,6 +48,7 @@
 #macro YIELD                   });__CoroutineEscape(__COROUTINE_ESCAPE_STATE.__YIELD,function(){return 
 #macro PAUSE                   });__CoroutineEscape(__COROUTINE_ESCAPE_STATE.__PAUSE,function(){return 
 #macro RETURN                  });__CoroutineEscape(__COROUTINE_ESCAPE_STATE.__RETURN,function(){return 
+#macro RESTART                 });__CoroutineEscape(__COROUTINE_ESCAPE_STATE.__RESTART,undefined);__CoroutineThen(function(){
 #macro BREAK                   });__CoroutineBreak(function(){ //N.B. This opens a blind function - it is never executed
 #macro CONTINUE                });__CoroutineContinue(function(){ //N.B. This opens a blind function - it is never executed
 #macro REPEAT                  });__CoroutineRepeat(function(){return 
