@@ -120,8 +120,8 @@ function __CoroutineCheckSyntax(_me)
         case "CO_ON_COMPLETE":
             switch(global.__coroutineSyntaxCheckerPrevious)
             {
-                case "RETURN": case "RESTART": case "THEN": case "END": case "END_IF": break;
-                default: __CoroutineError("Syntax error\nExpected RETURN, RESTART, THEN, END, or END_IF before ", _me, ", but found ", global.__coroutineSyntaxCheckerPrevious);
+                case "CO_BEGIN": case "RETURN": case "RESTART": case "THEN": case "END": case "END_IF": break;
+                default: __CoroutineError("Syntax error\nFound ", global.__coroutineSyntaxCheckerPrevious, " before ", _me, "\nExpected CO_BEGIN, RETURN, RESTART, THEN, END, or END_IF");
             }
         break;
         
