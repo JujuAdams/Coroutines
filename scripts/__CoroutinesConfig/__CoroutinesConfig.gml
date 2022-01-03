@@ -63,6 +63,7 @@
 #macro END_IF                  });__CoroutineEndIf(function(){
 #macro AWAIT                   });__CoroutineAwait(function(){return 
 #macro DELAY                   });__CoroutineDelay(function(){return 
+#macro AWAIT_BROADCAST         });__CoroutineAwaitBroadcast(function(){return 
 #macro AWAIT_FIRST             });__CoroutineAwaitFirst(function(){
 #macro AWAIT_ALL               });__CoroutineAwaitAll(function(){
 #macro AWAIT_ASYNC_HTTP        });__CoroutineAwaitAsync("http",function(){
