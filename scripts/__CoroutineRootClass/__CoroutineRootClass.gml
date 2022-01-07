@@ -298,7 +298,7 @@ function __CoroutineRootClass() constructor
             break;
             
             case __COROUTINE_ESCAPE_STATE.__RESTART:
-                Restart();
+                __CoroutineError("Coroutine escape state leaked RESTART\nPlease report this crash");
             break;
         }
         
