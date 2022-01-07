@@ -90,7 +90,13 @@ function __CoroutineAwaitAsyncClass() constructor
         }
         else
         {
+            var _previousRootStruct = global.__coroutineRootStruct;
+            global.__coroutineRootStruct = __coroutineRoot;
+            
             var _result = __function();
+            
+            global.__coroutineRootStruct =_previousRootStruct;
+            
             if (_result == true)
             {
                 __complete = true;
