@@ -43,6 +43,7 @@ global.__coroutineLastTick = current_time;
 global.__coroutineRootStruct = undefined;
 
 global.__coroutineManagerArray = [];
+global.__coroutineAwaitingBroadcast = {};
 global.__coroutineAwaitingAsync = { //TODO - Is this faster as a map or a struct?
     networking: [],
     http      : [],
@@ -111,7 +112,7 @@ function __CoroutineCheckSyntax(_me)
             switch(global.__coroutineSyntaxCheckerPrevious)
             {
                 //Just... everything
-                case "CO_BEGIN": case "THEN": case "YIELD": case "PAUSE": case "RETURN": case "END": case "REPEAT": case "RESTART": case "WHILE": case "IN": case "BREAK": case "CONTINUE": case "IF": case "ELSE": case "ELSE_IF": case "END_IF": case "AWAIT_ASYNC_*": case "ASYNC_TIMEOUT": case "AWAIT": case "DELAY": break;
+                case "CO_BEGIN": case "THEN": case "YIELD": case "PAUSE": case "RETURN": case "END": case "REPEAT": case "RESTART": case "WHILE": case "IN": case "BREAK": case "CONTINUE": case "IF": case "ELSE": case "ELSE_IF": case "END_IF": case "AWAIT_ASYNC_*": case "ASYNC_TIMEOUT": case "AWAIT": case "DELAY": case "AWAIT_BROADCAST": break;
                 case "FOREACH": break; //FIXME - Get "IN" to be detectable
                 default: __CoroutineError("Syntax error\nFound ", global.__coroutineSyntaxCheckerPrevious, " before ", _me);
             }
@@ -168,6 +169,7 @@ function __CoroutineCheckSyntax(_me)
         case "AWAIT_ASYNC_*":
         case "AWAIT":
         case "DELAY":
+        case "AWAIT_BROADCAST":
         case "AWAIT_FIRST":
         case "AWAIT_ALL":
             switch(global.__coroutineSyntaxCheckerPrevious)
