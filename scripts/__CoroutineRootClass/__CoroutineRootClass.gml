@@ -273,6 +273,12 @@ function __CoroutineRootClass() constructor
             //Clean up any hanging BREAK and CONTINUE commands
             global.__coroutineBreak    = false;
             global.__coroutineContinue = false;
+            
+            if (global.__coroutineEscapeState == __COROUTINE_ESCAPE_STATE.__RESTART)
+            {
+                Restart();
+                global.__coroutineEscapeState = __COROUTINE_ESCAPE_STATE.__NONE;
+            }
         }
         until ((global.__coroutineEscapeState > 0) || __complete);
         
