@@ -139,7 +139,12 @@ function __CoroutineRootClass() constructor
         //Call the CO_ON_COMPLETE function if one exists
         if (!__complete)
         {
+            var _previousRootStruct = global.__coroutineRootStruct;
+            global.__coroutineRootStruct = self;
+            
             if (is_method(__onCompleteFunction)) __onCompleteFunction();
+            
+            global.__coroutineRootStruct = _previousRootStruct;
         }
         
         __complete = true;
@@ -156,7 +161,12 @@ function __CoroutineRootClass() constructor
         //Call the CO_ON_COMPLETE function if one exists
         if (!__complete)
         {
+            var _previousRootStruct = global.__coroutineRootStruct;
+            global.__coroutineRootStruct = self;
+            
             if (is_method(__onCompleteFunction)) __onCompleteFunction();
+            
+            global.__coroutineRootStruct = _previousRootStruct;
         }
         
         __index = 0;
