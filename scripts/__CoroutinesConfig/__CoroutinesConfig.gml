@@ -41,7 +41,7 @@
 // will use the default macro names).
 #macro CO_BEGIN                ((function(){__CoroutineBegin(function(){ //__CoroutineGetNext() is required to work around GM compiler bug (https://github.com/JujuAdams/Coroutines/issues/7)
 #macro CO_ON_COMPLETE          });__CoroutineOnComplete(function(){
-#macro CO_END                  });return __CoroutineEnd();})())
+#macro CO_END                  });return __CoroutineEnd();})());
 #macro CO_PARAMS               global.__coroutineNext
 #macro CO_SCOPE                global.__coroutineScope
 #macro CO_LOCAL                global.__coroutineRootStruct
