@@ -46,12 +46,13 @@ global.__coroutineManagerArray = [];
 global.__coroutineAwaitingBroadcast = {};
 global.__coroutineAwaitingAsync = { //TODO - Is this faster as a map or a struct?
     networking: [],
-    http      : [],
-    social    : [],
-    save_load : [],
-    dialog    : [],
-    system    : [],
-    steam     : [],
+    http:       [],
+    social:     [],
+    save_load:  [],
+    dialog:     [],
+    system:     [],
+    steam:      [],
+    broadcast:  [],
 };
 
 
