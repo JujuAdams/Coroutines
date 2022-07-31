@@ -1,5 +1,5 @@
-#macro __COROUTINES_VERSION  "1.3.0"
-#macro __COROUTINES_DATE     "2021-12-15"
+#macro __COROUTINES_VERSION  "1.4.0"
+#macro __COROUTINES_DATE     "2022-07-31"
 
 show_debug_message("Welcome to Coroutines by @jujuadams! This is version " + __COROUTINES_VERSION + ", " + __COROUTINES_DATE);
 

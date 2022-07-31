@@ -1,10 +1,10 @@
 {
   "option_windows_display_name": "Coroutines",
   "option_windows_executable_name": "${project_name}.exe",
-  "option_windows_version": "1.3.0.0",
+  "option_windows_version": "1.4.0.0",
   "option_windows_company_info": "@jujuadams",
   "option_windows_product_info": "Coroutines",
-  "option_windows_copyright_info": "@jujuadams (c) 2021",
+  "option_windows_copyright_info": "@jujuadams (c) 2022",
   "option_windows_description_info": "Coroutines",
   "option_windows_display_cursor": true,
   "option_windows_icon": "${base_options_dir}/windows/icons/icon.ico",
