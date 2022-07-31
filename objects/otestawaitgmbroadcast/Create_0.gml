@@ -1,12 +1,12 @@
 CO_BEGIN
-    AWAIT_GAMEMAKER_BROADCAST
-        show_debug_message("AWAIT_GM_BROADCAST:");
+    AWAIT_ASYNC_BROADCAST
+        show_debug_message("AWAIT_ASYNC_BROADCAST:");
         show_debug_message("  event_type = \"" + event_data[? "event_type"] + "\"");
         show_debug_message("  message = \"" + event_data[? "message"] + "\"");
         show_debug_message("  element_id = " + string(event_data[? "element_id"]));
         if (event_data[? "message"] == "boop!") ASYNC_COMPLETE;
     THEN
-    show_debug_message("AWAIT_GM_BROADCAST complete");
+    show_debug_message("AWAIT_ASYNC_BROADCAST complete");
     RESTART
 CO_END
 

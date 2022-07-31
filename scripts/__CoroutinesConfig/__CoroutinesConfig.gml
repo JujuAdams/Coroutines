@@ -36,7 +36,7 @@
 // CoroutineBroadcast() function and listeners can be set up with AWAIT_BROADCAST
 // (see online documentation for more details). GameMaker has its own broadcast system
 // whereby sprites and sequences can emit events. GameMaker broadcasts can be picked up
-// by Coroutines using AWAIT_GAMEMAKER_BROADCAST, and the GameMaker global variable
+// by Coroutines using AWAIT_ASYNC_BROADCAST, and the GameMaker global variable
 // <event_data> will be accessible as you'd expect. Coroutine broadcasts and GameMaker
 // broadcasts are two different systems and normal don't interact.
 // 
@@ -44,7 +44,7 @@
 // Setting the macro below to <true> will allow GameMaker broadcasts to trigger native
 // Coroutine broadcast listeners. However, if a GameMaker broadcast triggers a native
 // listener then event_data will *not* be accessible. Setting this macro to <true> will
-// not disable AWAIT_GAMEMAKER_BROADCAST so be careful not to confuse behaviours.
+// not disable AWAIT_ASYNC_BROADCAST so be careful not to confuse behaviours.
 #macro COROUTINES_GAMEMAKER_BROADCASTS_TRIGGER_NATIVE  false
 
 
@@ -91,6 +91,6 @@
 #macro AWAIT_ASYNC_DIALOG      });__CoroutineAwaitAsync("dialog",function(){
 #macro AWAIT_ASYNC_SYSTEM      });__CoroutineAwaitAsync("system",function(){
 #macro AWAIT_ASYNC_STEAM       });__CoroutineAwaitAsync("steam",function(){
-#macro AWAIT_GM_BROADCAST      });__CoroutineAwaitAsync("broadcast",function(){
+#macro AWAIT_ASYNC_BROADCAST   });__CoroutineAwaitAsync("broadcast",function(){
 #macro ASYNC_TIMEOUT           });__CoroutineAsyncTimeout(function(){return 
 #macro ASYNC_COMPLETE          return true;

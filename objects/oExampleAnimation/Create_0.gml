@@ -2,7 +2,7 @@
 // We're going to use a coroutine to animate this!
 textArray = [
     { x :  0, y :  50, targetX : 20, alpha : 0, text : "Coroutines" },
-    { x :  0, y :  70, targetX : 20, alpha : 0, text : "@jujuadams 2021" },
+    { x :  0, y :  70, targetX : 20, alpha : 0, text : "@jujuadams 2022" },
     { x : 20, y : 100, targetX : 40, alpha : 0, text : "This is an example to demonstrate basic animations using a coroutine." },
 ];
 
