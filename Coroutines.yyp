@@ -66,8 +66,9 @@
     {"name":"PlayStation 5","path":"options/ps5/options_ps5.yy",},
     {"name":"Xbox Series XS","path":"options/xboxseriesxs/options_xboxseriesxs.yy",},
   ],
-  "defaultScriptType": 1,
+  "isDnDProject": false,
   "isEcma": false,
+  "tutorialPath": "",
   "configs": {
     "name": "Default",
     "children": [],
@@ -86,13 +87,13 @@
     {"targets":-1,"resourceVersion":"1.3","name":"audiogroup_default","resourceType":"GMAudioGroup",},
   ],
   "TextureGroups": [
-    {"isScaled":true,"compressFormat":"bz2","autocrop":true,"border":2,"mipsToGenerate":0,"groupParent":null,"targets":-1,"resourceVersion":"1.3","name":"Default","resourceType":"GMTextureGroup",},
+    {"isScaled":true,"autocrop":true,"border":2,"mipsToGenerate":0,"groupParent":null,"targets":-1,"resourceVersion":"1.3","name":"Default","resourceType":"GMTextureGroup",},
   ],
   "IncludedFiles": [],
   "MetaData": {
-    "IDEVersion": "2022.800.0.180",
+    "IDEVersion": "2.3.6.595",
   },
-  "resourceVersion": "1.6",
+  "resourceVersion": "1.4",
   "name": "Coroutines",
   "tags": [],
   "resourceType": "GMProject",
