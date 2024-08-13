@@ -1,4 +1,4 @@
-/// This function *must* be called once per frame in a Step event or corouintes will,
+/// This function *must* be called once per frame in a Step event or coroutines will
 /// not execute. This is typically done by calling this function in the Step event of
 /// a persistent instance. Be careful that instance doesn't get deactivated if you're
 /// using instance deactivation in your game!
