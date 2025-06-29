@@ -1,6 +1,6 @@
-<h1 align="center">Coroutines 1.4.0</h1>
+<h1 align="center">Coroutines 1.5.0</h1>
 
-<p align="center">Asynchronous execution in GML for GameMaker Studio 2.3.6 (and above)</p>
+<p align="center">Asynchronous execution in GML for GameMaker LTS 2022 (and above)</p>
 
 <p align="center"><a href="https://github.com/JujuAdams/Coroutines/releases/">Download the .yymps</a></p>
 <p align="center"> <a href="https://github.com/JujuAdams/Coroutines/wiki">Documentation</a></p>
