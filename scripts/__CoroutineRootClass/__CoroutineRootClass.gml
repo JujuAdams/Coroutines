@@ -136,6 +136,8 @@ function __CoroutineRootClass() constructor
             __CoroutineError("Cannot call .Cancel() for the coroutine that is currently being processed\nPlease use the RETURN command instead");
         }
         
+        __returnValue = undefined;
+        
         //Call the CO_ON_COMPLETE function if one exists
         if (!__complete)
         {
